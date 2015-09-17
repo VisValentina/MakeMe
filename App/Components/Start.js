@@ -3,6 +3,7 @@ var StartLogo = require('./StartLogo');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react/react-native');
 var Button = require('apsl-react-native-button');
+var Login = require('./Login');
 
 var {
 	View,
@@ -30,7 +31,7 @@ var styles = StyleSheet.create({
   	color: '#e6e6e6',
   	letterSpacing: 1,
   	fontFamily: 'Raleway',
-  	marginTop: 20,
+  	marginTop: 19,
   	fontSize: 12
   },
   loginStyleButton: {
@@ -64,6 +65,12 @@ var Start = React.createClass({
 		StatusBarIOS.setStyle(1);
 	},
 
+	goToLoginPage: function() {
+		this.props.navigator.push({
+			component: Login
+		})
+	},
+
 	render() {
 		return (
 			<View style={styles.tester}>
@@ -71,7 +78,7 @@ var Start = React.createClass({
 					<StartLogo/>
 					<Text style={styles.tagLine}>Exercise just got personal.</Text>
 
-					<Button
+					<Button onPress={this.goToLoginPage}
                 style={styles.loginStyleButton} textStyle={styles.loginStyleText}>
                 LOG IN
           </Button>
