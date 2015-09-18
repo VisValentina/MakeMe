@@ -53,7 +53,7 @@ var styles = StyleSheet.create({
   }
 });
 
-var Login = React.createClass({
+var Signup = React.createClass({
 
   getInitialState: function(){
     return {
@@ -62,7 +62,7 @@ var Login = React.createClass({
       username: '',
       newUsername: '',
       newPassword: '',
-      isLoginForm: true
+      isLoginForm: false
     }
   },
 
@@ -215,7 +215,7 @@ var Login = React.createClass({
         <Image source={require('image!Backdrop_sample')} style={styles.backgroundImage}>
           <StartLogo/>
           <Text style={styles.tagLine}>Exercise just got personal.</Text>
-          <Text style={styles.tagLine}> YOU LOGGED IN</Text>
+          <Text style={styles.tagLine}> YOU WANT TO SIGN UP</Text>
           {/* We need a view with styles to make this better, obviously */}
           <TouchableHighlight onPress={this.showLoginForm} >
             <Text style={styles.tagLine}>Login</Text>
@@ -230,4 +230,4 @@ var Login = React.createClass({
   )}
 });
 
-module.exports = Login
+module.exports = Signup

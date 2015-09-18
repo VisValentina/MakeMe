@@ -4,6 +4,7 @@ var Parse = require('parse/react-native');
 var ParseReact = require('parse-react/react-native');
 var Button = require('apsl-react-native-button');
 var Login = require('./Login');
+var Signup = require('./Signup');
 
 var {
 	View,
@@ -71,6 +72,13 @@ var Start = React.createClass({
 		})
 	},
 
+  goToSignupPage: function() {
+    this.props.navigator.push({
+      component: Signup
+    })
+  },
+
+
 	render() {
 		return (
 			<View style={styles.tester}>
@@ -83,7 +91,7 @@ var Start = React.createClass({
                 LOG IN
           </Button>
 
-          <Button
+          <Button onPress={this.goToSignupPage}
                 style={styles.signupStyleButton} textStyle={styles.loginStyleText}>
                 SIGN UP
           </Button>
