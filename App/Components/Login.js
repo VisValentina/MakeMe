@@ -50,6 +50,9 @@ var styles = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 2,
     backgroundColor: 'white'
+  },
+  nextSignup: {
+    color: 'red'
   }
 });
 
@@ -62,7 +65,8 @@ var Login = React.createClass({
       username: '',
       newUsername: '',
       newPassword: '',
-      isLoginForm: true
+      newEmail: '',
+      formType: 'login'
     }
   },
 
@@ -110,15 +114,22 @@ var Login = React.createClass({
     this.setState({newPassword: e.nativeEvent.text})
   },
 
+  onNewEmailChange: function(e) {
+    this.setState({newEmail: e.nativeEvent.text})
+  },
+
   signup() {
     var newUsername = this.state.newUsername;
     var newPassword = this.state.newPassword;
+    var newEmail = this.state.newEmail;
     this._newUsername.setNativeProps({text: ''});
     this._newPassword.setNativeProps({text: ''});
+    this._newEmail.setNativeProps({text: ''});
 
     var User = new Parse.User();
     User.set("username", newUsername);
     User.set("password", newPassword);
+    User.set("email", newEmail);
 
 
     User.signUp(null, {
@@ -134,11 +145,15 @@ var Login = React.createClass({
   },
 
   showLoginForm(){
-    this.setState({isLoginForm: true});
+    this.setState({formType: 'login'});
   },
 
-  showSignUpForm(){
-    this.setState({isLoginForm: false});
+  showSignUp1Form(){
+    this.setState({formType: 'signup1'})
+  },
+
+  showSignUp2Form(){
+    this.setState({formType: 'signup2'})
   },
 
   /* 
@@ -151,7 +166,7 @@ var Login = React.createClass({
   */
 
   _renderLoginSignUpForm(){
-    if(this.state.isLoginForm) {
+    if(this.state.formType === 'login') {
       return (
           <View style={styles.inputView}>
             <TextInput 
@@ -178,7 +193,7 @@ var Login = React.createClass({
             </TextInput>
           </View>
         )
-      } else {
+      } else if (this.state.formType === 'signup2'){
         return (
           <View style={styles.inputView}>
             <TextInput 
@@ -205,7 +220,27 @@ var Login = React.createClass({
             </TextInput>
             </View>
         )
-      }
+      } else {
+        return (
+          <View style={styles.inputView}>
+            <TextInput 
+              style={styles.inputLogin} 
+              placeholder="email"
+              autoFocus={true}
+              autoCorrect={false}
+              autoCapitalize='none'
+              keyboardType = 'email-address'
+              enablesReturnKeyAutomatically={true}
+              returnKeyType='next'
+              onChange={this.onNewEmailChange}
+              onSubmitEditing={this.moveToNewPasswordField}
+              ref={(c) => this._newEmail= c}>
+            </TextInput>
+            <TouchableHighlight onPress={this.showSignUp2Form} >
+              <Text style={styles.nextSignup}>Next</Text>
+            </TouchableHighlight>
+        </View>
+      )};
   },
 
   render() {
@@ -220,7 +255,7 @@ var Login = React.createClass({
           <TouchableHighlight onPress={this.showLoginForm} >
             <Text style={styles.tagLine}>Login</Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={this.showSignUpForm}>
+          <TouchableHighlight onPress={this.showSignUp1Form}>
            <Text style={styles.tagLine}>Sign Up</Text>
           </TouchableHighlight>
           {/* This is where you call the function */}
