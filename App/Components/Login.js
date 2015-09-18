@@ -3,6 +3,11 @@ var StartLogo = require('./StartLogo');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react/react-native');
 var Button = require('apsl-react-native-button');
+var InputBackground = require('./inputBackground');
+var InputBackgroundLeft = require('./inputBackgroundLeft');
+var About = require('./About');
+var Playlist = require('./Playlist');
+
 
 Parse.initialize(
  'w1pd3PV2UMN7XGjlS3B4ZbWeaovH99ZPub8xH85U',
@@ -40,19 +45,52 @@ var styles = StyleSheet.create({
     marginTop: 19,
     fontSize: 12
   },
+  tagLineDirectionLeft: {
+    color: '#e6e6e6',
+    letterSpacing: 1,
+    fontFamily: 'Raleway',
+    marginTop: 200,
+    fontSize: 11,
+    letterSpacing: 1,
+    textAlign: 'center',
+    marginRight: 45
+  },
+  tagLineDirectionRight: {
+    color: '#e6e6e6',
+    letterSpacing: 1,
+    fontFamily: 'Raleway',
+    marginTop: 200,
+    fontSize: 11,
+    letterSpacing: 1,
+    textAlign: 'center',
+    marginLeft: 45
+  },
+  makeRows: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   inputView: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 17
+
   },
   inputLogin: {
     height: 40,
     width: 330,
-    borderColor: 'red',
+    borderColor: 'transparent',
     borderWidth: 2,
-    backgroundColor: 'white'
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    fontFamily: 'Raleway',
+    fontSize: 15
   },
   nextSignup: {
-    color: 'red'
+    color: '#ce3c3c',
+    marginTop: 12,
+    fontSize: 15,
+    fontFamily: 'Raleway',
+    letterSpacing: 1
   }
 });
 
@@ -65,8 +103,7 @@ var Login = React.createClass({
       username: '',
       newUsername: '',
       newPassword: '',
-      newEmail: '',
-      formType: 'login'
+      newEmail: ''
     }
   },
 
@@ -88,13 +125,22 @@ var Login = React.createClass({
     this._username.setNativeProps({text: ''});
     this._password.setNativeProps({text: ''});
 
+    // TODO NOTE remove the logout before production
     Parse.User.logOut();
+    // We need to call the this.navigator inside a parse object.
+    // The parse object doesn't have a this. navigator
+    // So we assign this to another variable.
+
+    var parent = this;
 
     Parse.User.logIn(username, password, {
       success: function(user) {
         AlertIOS.alert('You successfully logged in', 'moo',
           [{text: 'Okay', onPress: () => console.log('Success')}]
           );
+        parent.props.navigator.push({
+          component: About
+    })    
       },
       error: function(user) {
         console.log("Error: " + user.code + ' ' + user.message)
@@ -124,19 +170,23 @@ var Login = React.createClass({
     var newEmail = this.state.newEmail;
     this._newUsername.setNativeProps({text: ''});
     this._newPassword.setNativeProps({text: ''});
-    this._newEmail.setNativeProps({text: ''});
+    // this._newEmail.setNativeProps({text: ''});
 
     var User = new Parse.User();
     User.set("username", newUsername);
     User.set("password", newPassword);
     User.set("email", newEmail);
 
+    var parent = this;
 
     User.signUp(null, {
       success: function(User) {
-        AlertIOS.alert('Signed up', 'booya!',
-          [{text: 'yurp', onPress: () => console.log('Hoora!')}]
-        );
+        // AlertIOS.alert('Signed up', 'booya!',
+        //   [{text: 'yurp', onPress: () => console.log('Hoora!')}]
+        // );
+        parent.props.navigator.push({
+          component: About
+        })
       },
       error: function(User, error) {
         console.log("Error signup: " + error + ' ' + User);
@@ -154,6 +204,7 @@ var Login = React.createClass({
 
   showSignUp2Form(){
     this.setState({formType: 'signup2'})
+    this._newEmail.setNativeProps({text: ''})
   },
 
   /* 
@@ -168,6 +219,7 @@ var Login = React.createClass({
   _renderLoginSignUpForm(){
     if(this.state.formType === 'login') {
       return (
+        <InputBackgroundLeft>
           <View style={styles.inputView}>
             <TextInput 
               style={styles.inputLogin} 
@@ -192,9 +244,11 @@ var Login = React.createClass({
               onSubmitEditing={this.loginAuthentification}>
             </TextInput>
           </View>
+        </InputBackgroundLeft>
         )
       } else if (this.state.formType === 'signup2'){
         return (
+          <InputBackground>
           <View style={styles.inputView}>
             <TextInput 
               style={styles.inputLogin} 
@@ -219,13 +273,15 @@ var Login = React.createClass({
               onSubmitEditing={this.signup}>
             </TextInput>
             </View>
+            </InputBackground>
         )
       } else {
         return (
+        <InputBackground>
           <View style={styles.inputView}>
             <TextInput 
               style={styles.inputLogin} 
-              placeholder="email"
+              placeholder="Email"
               autoFocus={true}
               autoCorrect={false}
               autoCapitalize='none'
@@ -233,13 +289,14 @@ var Login = React.createClass({
               enablesReturnKeyAutomatically={true}
               returnKeyType='next'
               onChange={this.onNewEmailChange}
-              onSubmitEditing={this.moveToNewPasswordField}
+              onSubmitEditing={this.showSignUp2Form}
               ref={(c) => this._newEmail= c}>
             </TextInput>
             <TouchableHighlight onPress={this.showSignUp2Form} >
               <Text style={styles.nextSignup}>Next</Text>
             </TouchableHighlight>
         </View>
+        </InputBackground>
       )};
   },
 
@@ -250,16 +307,21 @@ var Login = React.createClass({
         <Image source={require('image!Backdrop_sample')} style={styles.backgroundImage}>
           <StartLogo/>
           <Text style={styles.tagLine}>Exercise just got personal.</Text>
-          <Text style={styles.tagLine}> YOU LOGGED IN</Text>
           {/* We need a view with styles to make this better, obviously */}
-          <TouchableHighlight onPress={this.showLoginForm} >
-            <Text style={styles.tagLine}>Login</Text>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this.showSignUp1Form}>
-           <Text style={styles.tagLine}>Sign Up</Text>
-          </TouchableHighlight>
-          {/* This is where you call the function */}
-            {this._renderLoginSignUpForm()}
+          <View style={{flexDirection: 'row'}}>
+            <TouchableHighlight onPress={this.showLoginForm} >
+            <Text style={styles.tagLineDirectionLeft}>LOG IN</Text>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.showSignUp1Form}>
+             <Text style={styles.tagLineDirectionRight}>SIGN UP</Text>
+            </TouchableHighlight>
+          </View>
+            {/* This is where you call the function */}
+            
+              
+              {this._renderLoginSignUpForm()}
+              
+            
         </Image>
       </View>
   )}

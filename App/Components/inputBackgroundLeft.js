@@ -8,24 +8,25 @@ var {
 
 var styles = StyleSheet.create({
 	icon: {
-		width: 110,
-		height: 28,
+		width: 375,
+		height: 100,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginTop: 130
+		marginTop: 12
 	}
 });
 
-var StartLogo = React.createClass({
+var InputBackgroundLeft = React.createClass({
 	render(){
 		return (
 			<View>
 				<Image
-	        style={styles.icon} 
-	        source={require('image!start_logo')} />
+	        style={styles.icon} source={require('image!inputBackgroundLeft')} >
+	        {this.props.children}
+	      </Image>
       </View>
 		)
 	}
 });
 
-module.exports = StartLogo
+module.exports = InputBackgroundLeft

@@ -16,16 +16,16 @@ var styles = StyleSheet.create({
 	}
 });
 
-var StartLogo = React.createClass({
+var UseMe = React.createClass({
 	render(){
 		return (
 			<View>
 				<Image
 	        style={styles.icon} 
-	        source={require('image!start_logo')} />
+	        source={require('image!useMe')} />
       </View>
 		)
 	}
 });
 
-module.exports = StartLogo
+module.exports = UseMe
