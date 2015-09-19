@@ -4,6 +4,7 @@ var React = require('react-native');
 var NavigationBar = require('react-native-navbar');
 var Start = require('./App/Components/Start');
 var About = require('./App/Components/About');
+var Main = require('./App/Components/Main');
 
 var {
   AppRegistry,
@@ -43,7 +44,7 @@ var MakeMe = React.createClass({
               backgroundStyle={{backgroundColor: "transparent"}}
               style={{height: 0}}/>
           ),
-          component: Start
+          component: Main
         }} />
     );
   }
@@ -57,6 +58,7 @@ var MakeMe = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: -64
   }
 });
 

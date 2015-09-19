@@ -1,5 +1,5 @@
 var React = require('react-native');
-var Playlist = require('./Playlist');
+var Main = require('./Main');
 var Button = require('apsl-react-native-button');
 var UseMe = require('./UseMe');
 var Start = require('./Start');
@@ -67,7 +67,7 @@ var About = React.createClass({
 
 	goToPlaylistPage: function() {
 		this.props.navigator.push({
-			component: Playlist
+			component: Main
 		})
 	},
 

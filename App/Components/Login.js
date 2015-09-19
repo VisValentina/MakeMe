@@ -6,7 +6,7 @@ var Button = require('apsl-react-native-button');
 var InputBackground = require('./inputBackground');
 var InputBackgroundLeft = require('./inputBackgroundLeft');
 var About = require('./About');
-var Playlist = require('./Playlist');
+var Main = require('./Main');
 
 
 Parse.initialize(
@@ -139,7 +139,7 @@ var Login = React.createClass({
           [{text: 'Okay', onPress: () => console.log('Success')}]
           );
         parent.props.navigator.push({
-          component: About
+          component: Main
     })    
       },
       error: function(user) {

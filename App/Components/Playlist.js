@@ -1,44 +1,58 @@
 var React = require('react-native');
+var NavLogo = require('./NavLogo');
+var NavigationBar = require('react-native-navbar');
+var UserPlaylist = require('./UserPlaylist');
+
+
 
 var {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TextInput,
-  AlertIOS,
-  TouchableHighlight
+	View,
+	Text,
+	StyleSheet,
+	Navigator
 } = React;
 
 var styles = StyleSheet.create({
-  tester: {
+	container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'contain',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: -65
-  },
-  tagLine: {
-    color: '#e6e6e6',
-    letterSpacing: 1,
-    fontFamily: 'Raleway',
-    marginTop: 19,
-    fontSize: 12
+    backgroundColor: 'red'
   }
 });
 
+
 var Playlist = React.createClass({
+
+	renderScene(route, navigator) {
+    const Component = route.component;
+    let navBar = route.navigationBar;
+
+    if (navBar) {
+      navBar = React.addons.cloneWithProps(navBar, { navigator, route, });
+    }
+
+    return (
+      <View style={{ flex: 1, }}>
+        {navBar}
+        <Component navigator={navigator} route={route} />
+      </View>
+    );
+  },
+
 	render(){
 		return (
-			<View>
-				<Text style={styles.tagLine}>ABOUT PAGE TEXT</Text>
-      </View>
+			<Navigator
+        style = {styles.container}
+        renderScene={this.renderScene}
+        initialRoute={{
+        title: '',
+        navigationBar: (
+        	<NavigationBar
+        		customTitle={<NavLogo/>}
+        		
+        		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
+        ),
+        component: UserPlaylist
+      }} />
 		)
 	}
 });
