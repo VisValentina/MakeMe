@@ -23,6 +23,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		866BFABE1BAE0D9900592285 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 866BFABD1BAE0D9900592285 /* BebasNeue.otf */; settings = {ASSET_TAGS = (); }; };
 		869B4E4F1BAB4115006C4B13 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 869B4E4E1BAB4115006C4B13 /* Raleway-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -128,6 +129,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		866BFABD1BAE0D9900592285 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
 		869B4E4E1BAB4115006C4B13 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -290,6 +292,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				866BFABD1BAE0D9900592285 /* BebasNeue.otf */,
 				869B4E4E1BAB4115006C4B13 /* Raleway-Regular.ttf */,
 				13B07FAE1A68108700A75B9A /* MakeMe */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -511,6 +514,7 @@
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				866BFABE1BAE0D9900592285 /* BebasNeue.otf in Resources */,
 				869B4E4F1BAB4115006C4B13 /* Raleway-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
