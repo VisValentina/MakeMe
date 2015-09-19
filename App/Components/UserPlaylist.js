@@ -6,22 +6,23 @@ var {
   StyleSheet,
   Text,
   Image,
-  StatusBarIOS
+  StatusBarIOS,
+  ListView
 } = React;
 
 var styles = StyleSheet.create({
   tester: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'flex-start'
   },
     backgroundImage: {
-    height: 125,
+    height: 135,
     width: 375
   },
   routineName: {
   	marginLeft: 23,
-  	marginTop: 17,
+  	marginTop: 22,
   	fontFamily: 'Raleway',
   	fontSize: 19,
   	letterSpacing: 1.5,
@@ -57,6 +58,9 @@ var styles = StyleSheet.create({
   	color: '#ce3c3c',
   	letterSpacing: 3,
   	fontSize: 16
+  },
+  listView: {
+  	marginTop: -20
   }
 });
 
@@ -65,7 +69,37 @@ var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
 																				trainer: "Valentina Pherson",
 																				level: "2",
 																				category: "core"
-																		 }
+																		 },
+																		 {
+																				name: "HIIT",
+																				trainer: "Chris Reede",
+																				level: "3",
+																				category: "conditioning"
+																		 },
+																		 {
+																				name: "Purgatory 11",
+																				trainer: "Angel Alicea",
+																				level: "3",
+																				category: "strength"
+																		 },
+																		 {
+																				name: "Powerstrike",
+																				trainer: "Ilaria Montague",
+																				level: "3",
+																				category: "kickbox"
+																		 },
+																		 {
+																				name: "V - Core 1.3",
+																				trainer: "Valentina Pherson",
+																				level: "2",
+																				category: "core"
+																		 },
+																		 {
+																				name: "Fit to Fight",
+																				trainer: "James Park",
+																				level: "2",
+																				category: "boxing"
+																		 },
 																		];
 	var images = {
 	  core: require('image!core'),
@@ -77,18 +111,21 @@ var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
 
 var UserPlaylist = React.createClass({
 
+getInitialState: function() {
+   var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+   return {
+     dataSource: ds.cloneWithRows(MOCK_ROUTINE_PLAYLIST_RESULTS),
+   };
+ },
+
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
 	},
 
-	render(){
-		var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
-
+	renderRoutine(routine) {
 		var image = images[routine.category];
 
-
-
-		return (	
+		return (
 			<View style={styles.tester}>
 				<Image source={image} style={styles.backgroundImage}>
 				 <Text style={styles.routineName}>{routine.name}</Text>
@@ -102,6 +139,17 @@ var UserPlaylist = React.createClass({
 
 			 </Image>
 			</View>
+		)
+	},
+
+	render(){
+		var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
+
+		return (	
+			<ListView
+				dataSource={this.state.dataSource}
+				renderRow={this.renderRoutine}
+				style={styles.listView}/>
 		)
 	}
 });
