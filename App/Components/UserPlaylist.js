@@ -6,7 +6,7 @@ var {
   StyleSheet,
   Text,
   Image,
-  StatusBarIOS,
+  StatusBarIOS
 } = React;
 
 var styles = StyleSheet.create({
@@ -63,9 +63,17 @@ var styles = StyleSheet.create({
 var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
 																				name: "V - Core 1.2",
 																				trainer: "Valentina Pherson",
-																				level: "2"
+																				level: "2",
+																				category: "core"
 																		 }
 																		];
+	var images = {
+	  core: require('image!core'),
+	  conditioning: require('image!conditioning'),
+	  boxing: require('image!boxing'),
+	  kickbox: require('image!kickbox'),
+	  strength: require('image!strength')
+	};
 
 var UserPlaylist = React.createClass({
 
@@ -76,9 +84,13 @@ var UserPlaylist = React.createClass({
 	render(){
 		var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
 
+		var image = images[routine.category];
+
+
+
 		return (	
 			<View style={styles.tester}>
-			<Image source={require('image!core')} style={styles.backgroundImage}>
+				<Image source={image} style={styles.backgroundImage}>
 				 <Text style={styles.routineName}>{routine.name}</Text>
 				 <Text style={styles.trainerName}>{routine.trainer}</Text>
 				 <Text style={styles.routineLevel}>Level {routine.level}</Text>
