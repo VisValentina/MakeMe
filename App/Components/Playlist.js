@@ -2,8 +2,7 @@ var React = require('react-native');
 var NavLogo = require('./NavLogo');
 var NavigationBar = require('react-native-navbar');
 var UserPlaylist = require('./UserPlaylist');
-
-
+var CustomNextButton = require('./CustomNextButton');
 
 var {
 	View,
@@ -48,7 +47,7 @@ var Playlist = React.createClass({
         navigationBar: (
         	<NavigationBar
         		customTitle={<NavLogo/>}
-        		
+        		customNext={<CustomNextButton/>}
         		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
         component: UserPlaylist
