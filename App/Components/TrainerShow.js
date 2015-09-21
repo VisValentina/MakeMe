@@ -1,8 +1,9 @@
 var React = require('react-native');
 var NavLogo = require('./NavLogo');
 var NavigationBar = require('react-native-navbar');
-var UserPlaylist = require('./UserPlaylist');
 var CustomNextButton = require('./CustomNextButton');
+var UserTrainerShow = require('./UserTrainerShow');
+var CustomBackButton = require('./CustomBackButton');
 
 var {
 	View,
@@ -19,7 +20,7 @@ var styles = StyleSheet.create({
 });
 
 
-var Playlist = React.createClass({
+var TrainerShow = React.createClass({
 
 	renderScene(route, navigator) {
     const Component = route.component;
@@ -47,13 +48,15 @@ var Playlist = React.createClass({
         navigationBar: (
         	<NavigationBar
         		customTitle={<NavLogo/>}
+            customPrev={<CustomBackButton/>}
         		customNext={<CustomNextButton/>}
         		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserPlaylist
+        component: UserTrainerShow,
+        passProps: {trainerName: this.props.trainerName}
       }} />
 		)
 	}
 });
 
-module.exports = Playlist
+module.exports = TrainerShow

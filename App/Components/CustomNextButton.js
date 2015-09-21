@@ -38,7 +38,7 @@ var CustomNextButton = React.createClass( {
 		var Start = require('./Start');
     this.props.navigator.push({
       component: Start
-    });  
+    });      
 	},
 
 	render(){

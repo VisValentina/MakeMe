@@ -1,5 +1,7 @@
 var React = require('react-native');
 var Button = require('apsl-react-native-button');
+var TrainerShow = require('./TrainerShow');
+var UserTrainerShow = require('./UserTrainerShow');
 
 var {
   View,
@@ -7,7 +9,8 @@ var {
   Text,
   Image,
   StatusBarIOS,
-  ListView
+  ListView,
+  TouchableHighlight
 } = React;
 
 var styles = StyleSheet.create({
@@ -122,17 +125,38 @@ getInitialState: function() {
 		StatusBarIOS.setStyle(1);
 	},
 
+	showRoutine(routineName){
+		console.log(routineName)
+	},
+
+	showTrainer(trainerName){
+		console.log(trainerName);
+		this.props.navigator.replace({
+			component: TrainerShow,
+			passProps: {trainerName}
+		})
+	},
+
+
+
 	renderRoutine(routine) {
 		var image = images[routine.category];
 
 		return (
 			<View style={styles.tester}>
 				<Image source={image} style={styles.backgroundImage}>
-				 <Text style={styles.routineName}>{routine.name}</Text>
-				 <Text style={styles.trainerName}>{routine.trainer}</Text>
+
+					<TouchableHighlight onPress={() => this.showRoutine(routine.name)}>
+				 		<Text style={styles.routineName}>{routine.name}</Text>
+				 	</TouchableHighlight>
+
+				 	<TouchableHighlight onPress={() => this.showTrainer(routine.trainer)}>
+				 		<Text style={styles.trainerName}>{routine.trainer}</Text>
+				 	</TouchableHighlight>
+
 				 <Text style={styles.routineLevel}>Level {routine.level}</Text>
 				 
-				 <Button onPress={console.log("PRESSED")}
+				 <Button 
                 style={styles.playlistButton} textStyle={styles.playlistButtonText}>
                 GO
           </Button>
