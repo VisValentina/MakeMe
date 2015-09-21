@@ -1,7 +1,7 @@
 var React = require('react-native');
 var Button = require('apsl-react-native-button');
 var TrainerShow = require('./TrainerShow');
-var UserTrainerShow = require('./UserTrainerShow');
+var RoutineShow = require('./RoutineShow');
 
 var {
   View,
@@ -134,6 +134,14 @@ getInitialState: function() {
 		this.props.navigator.replace({
 			component: TrainerShow,
 			passProps: {trainerName}
+		})
+	},
+
+		showRoutine(routineName){
+		console.log(routineName);
+		this.props.navigator.replace({
+			component: RoutineShow,
+			passProps: {routineName}
 		})
 	},
 
