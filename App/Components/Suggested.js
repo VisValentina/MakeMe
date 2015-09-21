@@ -1,8 +1,9 @@
 var React = require('react-native');
-var NavLogo = require('./NavLogo');
+var NavLogoTryMe = require('./NavLogoTryMe');
 var NavigationBar = require('react-native-navbar');
 var UserPlaylist = require('./UserPlaylist');
 var CustomNextButton = require('./CustomNextButton');
+var CustomPrevFilter = require('./CustomPrevFilter');
 var UserSuggested = require('./UserSuggested');
 
 var {
@@ -47,8 +48,9 @@ var Suggested = React.createClass({
         title: '',
         navigationBar: (
         	<NavigationBar
-        		customTitle={<NavLogo/>}
+        		customTitle={<NavLogoTryMe/>}
         		customNext={<CustomNextButton/>}
+            customPrev={<CustomPrevFilter/>}
         		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
         component: UserSuggested

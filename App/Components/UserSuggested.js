@@ -61,6 +61,18 @@ var styles = StyleSheet.create({
   },
   listView: {
   	marginTop: -20
+  },
+  suggestedBar: {
+  	width: 375,
+  	height: 21
+  },
+  suggestedContent: {
+  	fontFamily: 'Raleway',
+  	color: '#b3b3b3',
+  	fontSize: 11,
+  	marginTop: 4,
+  	letterSpacing: 1,
+  	alignSelf: 'center'
   }
 });
 
@@ -145,11 +157,16 @@ getInitialState: function() {
 	render(){
 		var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
 
-		return (	
-			<ListView
-				dataSource={this.state.dataSource}
-				renderRow={this.renderRoutine}
-				style={styles.listView}/>
+		return (
+			<View style={styles.tester}>
+				<Image source={require('image!suggested_bar')} style={styles.suggestedBar}>
+						<Text style={styles.suggestedContent}>Suggested for you</Text>
+				</Image>
+				<ListView
+					dataSource={this.state.dataSource}
+					renderRow={this.renderRoutine}
+					style={styles.listView}/>
+			</View>
 		)
 	}
 });
