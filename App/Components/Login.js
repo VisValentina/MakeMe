@@ -1,5 +1,5 @@
 var React = require('react-native');
-var StartLogo = require('./StartLogo');
+var LoginSignupLogo = require('./LoginSignupLogo');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react/react-native');
 var Button = require('apsl-react-native-button');
@@ -305,7 +305,7 @@ var Login = React.createClass({
     return (
       <View style={styles.tester}>
         <Image source={require('image!Backdrop_sample')} style={styles.backgroundImage}>
-          <StartLogo/>
+          <LoginSignupLogo/>
           <Text style={styles.tagLine}>Exercise just got personal.</Text>
           {/* We need a view with styles to make this better, obviously */}
           <View style={{flexDirection: 'row'}}>

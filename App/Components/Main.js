@@ -1,5 +1,6 @@
 var React = require('react-native');
 var Playlist = require('./Playlist');
+var Suggested = require('./Suggested');
 
 
 var {
@@ -47,12 +48,13 @@ var Main = React.createClass({
     return (
       <TabBarIOS
       barTintColor="#1c1c1c"
-      tintColor="#ce3c3c">
+      tintColor="#b3b3b3">
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'tabOne'}
           onPress={() => this.setTab('tabOne')}
           title={''}
-          icon={require('image!playlist_icon')}>
+          icon={require('image!playlist_icon_b')}
+          selectedIcon={require('image!playlist_icon')}>
           <Playlist/>
         </TabBarIOS.Item>
 
@@ -60,10 +62,9 @@ var Main = React.createClass({
           selected={this.state.selectedTab === 'tabTwo'}
           onPress={() => this.setTab('tabTwo')}
           title={''}
-          icon={require('image!suggested_icon')}>
-          <View style={styles.tabContent}>
-            <Text style={styles.tabText}>I AM THE SEARCH PAGE</Text>
-          </View>
+          icon={require('image!suggested_icon_b')}
+          selectedIcon={require('image!suggested_icon')}>
+          <Suggested/>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -80,7 +81,8 @@ var Main = React.createClass({
           selected={this.state.selectedTab === 'tabFour'}
           onPress={() => this.setTab('tabFour')}
           title={''}
-          icon={require('image!favorites_icon')}>
+          icon={require('image!favorites_icon_b')}
+          selectedIcon={require('image!favorites_icon')}>
           <View style={styles.tabContent}>
             <Text style={styles.tabText}>I AM THE FAVORITE PAGE</Text>
           </View>
@@ -90,7 +92,8 @@ var Main = React.createClass({
           selected={this.state.selectedTab === 'tabFive'}
           onPress={() => this.setTab('tabFive')}
           title={''}
-          icon={require('image!profile_icon')}>
+          icon={require('image!profile_icon_b')}
+          selectedIcon={require('image!profile_icon')}>
           <View style={styles.tabContent}>
             <Text style={styles.tabText}>I AM THE PROFILE PAGE</Text>
           </View>
