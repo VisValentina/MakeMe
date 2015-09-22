@@ -46,7 +46,43 @@ var styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 5,
     letterSpacing: 1
-  }
+  },
+  redBar: {
+    width: 375,
+    height: 55
+  },
+  barTopLeft: {
+    color: '#ffffff',
+    fontFamily: 'Raleway',
+    fontWeight: 'bold',
+
+  },
+  parent: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  child: {
+    textAlign: 'center',
+    fontSize: 12,
+    flex: 1,
+    color: '#ffffff',
+    fontFamily: 'Raleway',
+    letterSpacing: 2,
+    fontWeight: 'bold',
+    marginTop: 9
+  },
+  childLow: {
+    textAlign: 'center',
+    fontSize: 11,
+    flex: 1,
+    color: '#000000',
+    fontFamily: 'Raleway',
+    letterSpacing: 2,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
 });
 
 var TRAINER_MOCK_DATABASE = [
@@ -101,6 +137,23 @@ var UserTrainerShow = React.createClass({
           <Text style={styles.trainerName}>Ilaria Montague</Text>
           <Text style={styles.location}>New York, NY</Text>
         </Image>
+
+
+        <Image source={require('image!triple_red_bar')} style={styles.redBar}>
+          <View style={styles.parent}>
+            <Text style={styles.child}>11 k</Text>
+            <Text style={styles.child}>17</Text>
+            <Text style={styles.child}>81</Text>
+          </View>
+
+          <View style={styles.parent}>
+          <Text style={styles.childLow}>Favorited</Text>
+          <Text style={styles.childLow}>Routines</Text>
+          <Text style={styles.childLow}>Comments</Text>
+          </View>
+
+        </Image>
+
 
         <Text style={styles.text}>I AM THE TRAINER SHOW PAGE</Text>
 				<Text style={styles.text}>{this.props.trainerName}</Text>
