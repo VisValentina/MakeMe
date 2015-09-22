@@ -83,6 +83,26 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10
   },
+  parentBottom: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black',
+    borderWidth: 1,
+    marginBottom: 45,
+    alignSelf: 'stretch'
+  },
+  childBottom: {
+    flex: 1,
+    borderColor: '#333333',
+    borderWidth: .5,
+    textAlign: 'left',
+    fontSize: 13,
+    fontFamily: 'Raleway',
+    color: '#cccccc',
+    paddingTop: 23,
+    paddingLeft: 30,
+    letterSpacing: 1
+  }
 });
 
 var TRAINER_MOCK_DATABASE = [
@@ -151,12 +171,16 @@ var UserTrainerShow = React.createClass({
           <Text style={styles.childLow}>Routines</Text>
           <Text style={styles.childLow}>Comments</Text>
           </View>
-
         </Image>
 
+        <View style={styles.parentBottom}>
+          <Text style={styles.childBottom}>Routines</Text>
+          <Text style={styles.childBottom}>Bio</Text>
+          <Text style={styles.childBottom}>Active Since</Text>
+          <Text style={styles.childBottom}>Specialties</Text>
+          <Text style={styles.childBottom}>Contact</Text>
+        </View>
 
-        <Text style={styles.text}>I AM THE TRAINER SHOW PAGE</Text>
-				<Text style={styles.text}>{this.props.trainerName}</Text>
 			</View>
 		)
 	}
