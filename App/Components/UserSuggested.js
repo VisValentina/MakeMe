@@ -1,5 +1,7 @@
 var React = require('react-native');
 var Button = require('apsl-react-native-button');
+var TrainerShow = require('./TrainerShow');
+var RoutineShow = require('./RoutineShow');
 
 var {
   View,
@@ -7,7 +9,8 @@ var {
   Text,
   Image,
   StatusBarIOS,
-  ListView
+  ListView,
+  TouchableHighlight
 } = React;
 
 var styles = StyleSheet.create({
@@ -76,7 +79,7 @@ var styles = StyleSheet.create({
   }
 });
 
-var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
+var MOCK_ROUTINE_SUGGESTED_RESULTS = [{
 																				name: "Bodystrikes",
 																				trainer: "Ilaria Montague",
 																				level: "2",
@@ -98,16 +101,16 @@ var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
 																				name: "Titan Method 2",
 																				trainer: "Omar Sandoval",
 																				level: "3",
-																				category: "conditioning"
+																				category: "strength"
 																		 },
 																		 {
 																				name: "Hard Core",
-																				trainer: "Valentina Pherson",
+																				trainer: "Val Pherson",
 																				level: "3",
 																				category: "core"
 																		 },
 																		 {
-																				name: "Bodyshredder",
+																				name: "Bodyshred",
 																				trainer: "Jilian Michaels",
 																				level: "2",
 																				category: "conditioning"
@@ -126,12 +129,27 @@ var UserSuggested = React.createClass({
 getInitialState: function() {
    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
    return {
-     dataSource: ds.cloneWithRows(MOCK_ROUTINE_PLAYLIST_RESULTS),
+     dataSource: ds.cloneWithRows(MOCK_ROUTINE_SUGGESTED_RESULTS),
    };
  },
 
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
+	},
+
+	showTrainer(trainerName){
+		this.props.navigator.replace({
+			component: TrainerShow,
+			passProps: {trainerName}
+		})
+	},
+
+	showRoutine(routineName){
+		console.log(routineName);
+		this.props.navigator.replace({
+			component: RoutineShow,
+			passProps: {routineName}
+		})
 	},
 
 	renderRoutine(routine) {
@@ -140,13 +158,17 @@ getInitialState: function() {
 		return (
 			<View style={styles.tester}>
 				<Image source={image} style={styles.backgroundImage}>
+				<TouchableHighlight onPress={() => this.showRoutine(routine.name)}>
 				 <Text style={styles.routineName}>{routine.name}</Text>
+				</TouchableHighlight>
+				<TouchableHighlight onPress={() => this.showTrainer(routine.trainer)}> 
 				 <Text style={styles.trainerName}>{routine.trainer}</Text>
+				</TouchableHighlight> 
 				 <Text style={styles.routineLevel}>Level {routine.level}</Text>
 				 
 				 <Button onPress={console.log("PRESSED")}
                 style={styles.playlistButton} textStyle={styles.playlistButtonText}>
-                GO
+                +
           </Button>
 
 			 </Image>
@@ -155,7 +177,7 @@ getInitialState: function() {
 	},
 
 	render(){
-		var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
+		var routine = MOCK_ROUTINE_SUGGESTED_RESULTS[0];
 
 		return (
 			<View style={styles.tester}>

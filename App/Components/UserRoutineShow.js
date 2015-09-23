@@ -140,6 +140,92 @@ coverImage: {
   }
 });
 
+var MOCK_ROUTINE_DATABASE = [{
+                                  id: "0",
+                                  name: "V - Core 1.2",
+                                  trainer: "Val Pherson",
+                                  level: "2",
+                                  category: "core"
+                               },
+                               {
+                                  id: "1",
+                                  name: "HIIT",
+                                  trainer: "Chris Reede",
+                                  level: "3",
+                                  category: "conditioning"
+                               },
+                               {
+                                  id: "2",
+                                  name: "Purgatory 11",
+                                  trainer: "Angel Alicea",
+                                  level: "3",
+                                  category: "strength"
+                               },
+                               {
+                                  id: "3",
+                                  name: "Powerstrike",
+                                  trainer: "Ilaria Montague",
+                                  level: "3",
+                                  category: "kickbox"
+                               },
+                               {
+                                  id: "4",
+                                  name: "V - Core 1.3",
+                                  trainer: "Val Pherson",
+                                  level: "2",
+                                  category: "core"
+                               },
+                               {
+                                  id: "5",
+                                  name: "Fit to Fight",
+                                  trainer: "James Park",
+                                  level: "2",
+                                  category: "boxing"
+                               },
+                               {
+                                  id: "6",
+                                  name: "Bodystrikes",
+                                  trainer: "Ilaria Montague",
+                                  level: "2",
+                                  category: "kickbox"
+                               },
+                               {
+                                  id: "7",
+                                  name: "Powerstrike 2.0",
+                                  trainer: "Ilaria Montague",
+                                  level: "3",
+                                  category: "kickbox"
+                               },
+                               {
+                                  id: "8",
+                                  name: "Diesel",
+                                  trainer: "Angel Alicea",
+                                  level: "3",
+                                  category: "strength"
+                               },
+                               {
+                                  id: "9",
+                                  name: "Titan Method 2",
+                                  trainer: "Omar Sandoval",
+                                  level: "3",
+                                  category: "conditioning"
+                               },
+                               {
+                                  id: "10",
+                                  name: "Hard Core",
+                                  trainer: "Val Pherson",
+                                  level: "3",
+                                  category: "core"
+                               },
+                               {
+                                  id: "11",
+                                  name: "Bodyshred",
+                                  trainer: "Jilian Michaels",
+                                  level: "2",
+                                  category: "conditioning"
+                               }
+                              ];
+
 var UserRoutineShow = React.createClass({
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
@@ -147,6 +233,8 @@ var UserRoutineShow = React.createClass({
 
 
 	render(){
+
+
 		return (
 			<View style={styles.tester}>
         <Image source={require('image!kickbox_category')} style={styles.coverImage}>

@@ -1,7 +1,7 @@
 var React = require('react-native');
 var Playlist = require('./Playlist');
 var Suggested = require('./Suggested');
-
+var Go = require('./Go');
 
 var {
   View,
@@ -72,9 +72,7 @@ var Main = React.createClass({
           onPress={() => this.setTab('tabThree')}
           title={''}
           icon={require('image!go_icon')}>
-          <View style={styles.bgWrapper}>
-             <Text style={styles.tabText}>I AM THE WORKOUT PAGE</Text>
-          </View>
+          <Go/>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item

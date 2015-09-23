@@ -430,8 +430,6 @@ var TRAINER_MOCK_DATABASE = [
     var coverImage = coverImages[profile.name];
     var routines = this.getRoutines(profile.routines);
 
-    //var profile = TRAINER_MOCK_DATABASE[0];
-
 		return (
 			<View style={styles.tester}>
         <Image source={coverImage} style={styles.coverImage}>
