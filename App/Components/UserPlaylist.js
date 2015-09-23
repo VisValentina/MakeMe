@@ -125,10 +125,6 @@ getInitialState: function() {
 		StatusBarIOS.setStyle(1);
 	},
 
-	showRoutine(routineName){
-		console.log(routineName)
-	},
-
 	showTrainer(trainerName){
 		console.log(trainerName);
 		this.props.navigator.replace({
@@ -137,7 +133,7 @@ getInitialState: function() {
 		})
 	},
 
-		showRoutine(routineName){
+	showRoutine(routineName){
 		console.log(routineName);
 		this.props.navigator.replace({
 			component: RoutineShow,
