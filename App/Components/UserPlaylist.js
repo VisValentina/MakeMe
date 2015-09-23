@@ -69,7 +69,7 @@ var styles = StyleSheet.create({
 
 var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
 																				name: "V - Core 1.2",
-																				trainer: "Valentina Pherson",
+																				trainer: "Val Pherson",
 																				level: "2",
 																				category: "core"
 																		 },
@@ -93,7 +93,7 @@ var MOCK_ROUTINE_PLAYLIST_RESULTS = [{
 																		 },
 																		 {
 																				name: "V - Core 1.3",
-																				trainer: "Valentina Pherson",
+																				trainer: "Val Pherson",
 																				level: "2",
 																				category: "core"
 																		 },
@@ -126,7 +126,6 @@ getInitialState: function() {
 	},
 
 	showTrainer(trainerName){
-		console.log(trainerName);
 		this.props.navigator.replace({
 			component: TrainerShow,
 			passProps: {trainerName}

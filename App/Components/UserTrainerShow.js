@@ -96,31 +96,59 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   childBottom: {
-    // flex: 1,
+    flexDirection: 'row',
     borderColor: '#333333',
     borderWidth: .5,
+    height: 60
+  },
+  childBottomLeft: {
+    flex: 1,
     textAlign: 'left',
     fontSize: 13,
     fontFamily: 'Raleway',
     color: '#cccccc',
-    paddingTop: 23,
+    alignSelf: 'center',
     paddingLeft: 30,
     letterSpacing: 1,
-    backgroundColor: 'black',
-    height: 60
+    backgroundColor: 'transparent'
+  },
+  childBottomRight: {
+    flex: 1,
+    textAlign: 'right',
+    fontSize: 12,
+    fontFamily: 'Raleway',
+    color: '#999999',
+    alignSelf: 'center',
+    paddingRight: 30,
+    letterSpacing: 1,
+    backgroundColor: 'transparent'
+  },
+  childBottomRightImage: {
+    height: 10,
+    width: 8,
+    alignSelf: 'center',
+    marginRight: 30
+  },
+  childBottomRightImageTrue: {
+    height: 8,
+    width: 10,
+    alignSelf: 'center',
+    marginRight: 30
   },
   childBottomBio: {
-    // flex: 1,
-    borderColor: '#333333',
+    borderColor: 'transparent',
     borderWidth: .5,
     textAlign: 'center',
-    fontSize: 13,
-    fontFamily: 'Raleway',
-    color: '#cccccc',
-    // justifyContent: 'center',
+    fontSize: 14,
+    fontFamily: 'Helvetica Neue',
+    fontStyle: 'italic',
+    color: '#ce3c3c',
     letterSpacing: 1,
-    backgroundColor: 'green',
-    height: 100
+    lineHeight: 20,
+    backgroundColor: 'transparent',
+    height: 110,
+    marginRight: 40,
+    marginLeft: 40
   },
   backgroundImage: {
     height: 135,
@@ -179,22 +207,64 @@ var styles = StyleSheet.create({
 
 var TRAINER_MOCK_DATABASE = [
                             {
-                              id:"",
+                              id:"0",
                               name:"Ilaria Montague",
                               numFavorites:"11",
                               numComments: "81",
                               numRoutines:"17",    
-                              bio:"I am passionate about making people feel and look like a beast.",
+                              bio:'"I train students to have a great workout, but at the same time to develop a stronger inner self."',
                               profilePic:"",
                               coverPic:"",
                               routines: ["5", "2", "0"],
-                              activeSince: "",
-                              contact:"",
+                              activeSince: "May 20, 2015",
+                              contact:"ilaria@strikeny.com",
                               location:"New York, NY",
-                              specialties: ["martial arts", "boxing"]
+                              specialties: "Martial arts"
                             },
                             {
-
+                              id:"1",
+                              name:"Chris Reede",
+                              numFavorites:"3",
+                              numComments: "17",
+                              numRoutines:"4",    
+                              bio:'"I am here to give you the best workout in the world, hell yeah!"',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["1", "3"],
+                              activeSince: "June 06, 2015",
+                              contact:"chris@barrysbootcamp.com",
+                              location:"San Francisco, CA",
+                              specialties: "Interval training"
+                            },
+                            {
+                              id:"2",
+                              name:"Val Pherson",
+                              numFavorites:"13",
+                              numComments: "36",
+                              numRoutines:"3",    
+                              bio:'"Eat clean and train mean."',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["4", "2", "5"],
+                              activeSince: "March 28, 2015",
+                              contact:"v@vfit.com",
+                              location:"San Francisco, CA",
+                              specialties: "Elite Performance"
+                            },
+                            {
+                              id:"3",
+                              name:"Angel Alicea",
+                              numFavorites:"22",
+                              numComments: "88",
+                              numRoutines:"6",    
+                              bio:'"You have got to go through hell to get to heaven. Purgatory bootcamp style."',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["1", "2", "3"],
+                              activeSince: "April 11, 2015",
+                              contact:"angel@purgatory.com",
+                              location:"Miami, FL",
+                              specialties: "Bootcamp, VIPR"
                             }
                             ];
 
@@ -202,7 +272,7 @@ var TRAINER_MOCK_DATABASE = [
  var MOCK_ROUTINE_DATABASE = [{
                                   id: "0",
                                   name: "V - Core 1.2",
-                                  trainer: "Valentina Pherson",
+                                  trainer: "Val Pherson",
                                   level: "2",
                                   category: "core"
                                },
@@ -230,7 +300,7 @@ var TRAINER_MOCK_DATABASE = [
                                {
                                   id: "4",
                                   name: "V - Core 1.3",
-                                  trainer: "Valentina Pherson",
+                                  trainer: "Val Pherson",
                                   level: "2",
                                   category: "core"
                                },
@@ -246,12 +316,16 @@ var TRAINER_MOCK_DATABASE = [
 
   var profileImages = {
     "Ilaria Montague": require('image!ilaria_profile'),
-    "Valentina Pherson": require('image!ilaria_profile'),
+    "Val Pherson": require('image!val_profile'),
+    "Chris Reede": require('image!chris_profile'),
+    "Angel Alicea": require('image!angel_profile'),
   };
 
   var coverImages = {
     "Ilaria Montague": require('image!ilaria_cover'),
-    "Valentina Pherson": require('image!ilaria_cover'),
+    "Val Pherson": require('image!val_cover'),
+    "Chris Reede": require('image!chris_cover'),
+    "Angel Alicea": require('image!angel_cover'),
   };
 
   var images = {
@@ -331,21 +405,38 @@ var TRAINER_MOCK_DATABASE = [
     )
   },
 
+  dropDownArrow(active){
+    if (active) {
+      return ( <Image source={require('image!drop_arrow_true')} style={styles.childBottomRightImageTrue}/> )
+    } else {
+      return ( <Image source={require('image!drop_arrow_false')} style={styles.childBottomRightImage}/>)
+    };
+  },
+
+  getTrainer(trainer){
+    for (var i = TRAINER_MOCK_DATABASE.length - 1; i >= 0; i--) {
+      if (TRAINER_MOCK_DATABASE[i].name === trainer) {
+        return TRAINER_MOCK_DATABASE[i]
+      }
+    };
+  },
+
 	render(){
 
-    var profile = TRAINER_MOCK_DATABASE[0];
+    //var profile = TRAINER_MOCK_DATABASE[0];
+    var profile = this.getTrainer(this.props.trainerName);
 
     var profileImage = profileImages[profile.name];
     var coverImage = coverImages[profile.name];
     var routines = this.getRoutines(profile.routines);
 
-    var profile = TRAINER_MOCK_DATABASE[0];
+    //var profile = TRAINER_MOCK_DATABASE[0];
 
 		return (
 			<View style={styles.tester}>
         <Image source={coverImage} style={styles.coverImage}>
           <Image source={profileImage} style={styles.profileImage}/>
-          <Text style={styles.trainerName1}>{profile.name}</Text>
+          <Text style={styles.trainerName1}>{profile.name} </Text>
           <Text style={styles.location}>{profile.location}</Text>
         </Image>
 
@@ -368,9 +459,14 @@ var TRAINER_MOCK_DATABASE = [
           automaticallyAdjustContentInsets={false} 
           contentContainerStyle={styles.parentBottom}>
 
-          <TouchableHighlight onPress={() => this.toggleRoutine(routines)}>
-          <Text style={styles.childBottom}>Routines</Text>
-          </TouchableHighlight>
+          
+            <TouchableHighlight onPress={() => this.toggleRoutine(routines)}>
+              <View style={styles.childBottom}>
+                <Text style={styles.childBottomLeft}>Routines</Text>
+                {this.dropDownArrow(this.state.showRoutines)}
+              </View>
+            </TouchableHighlight>
+          
 
           {this.state.showRoutines && (<View style={styles.spacer}></View>)}
 
@@ -382,15 +478,32 @@ var TRAINER_MOCK_DATABASE = [
               contentInset={{top: 64}}/>
           )}
 
-          <TouchableHighlight onPress={this.toggleBio}>
-          <Text style={styles.childBottom}>Bio</Text>
-          </TouchableHighlight>
+          
+            <TouchableHighlight onPress={this.toggleBio}>
+            <View style={styles.childBottom}>
+              <Text style={styles.childBottomLeft}>Bio</Text>
+              {this.dropDownArrow(this.state.showBio)}
+            </View>
+            </TouchableHighlight>
+          
 
           {this.state.showBio && (<Text style={styles.childBottomBio}>{profile.bio}</Text>)}
           
-          <Text style={styles.childBottom}>Active Since</Text>
-          <Text style={styles.childBottom}>Specialties</Text>
-          <Text style={styles.childBottom}>Contact</Text>
+          <View style={styles.childBottom}>
+            <Text style={styles.childBottomLeft}>Active Since</Text>
+            <Text style={styles.childBottomRight}>{profile.activeSince}</Text>
+          </View>
+
+          <View style={styles.childBottom}>
+            <Text style={styles.childBottomLeft}>Specialties</Text>
+            <Text style={styles.childBottomRight}>{profile.specialties}</Text>
+          </View>
+
+          <View style={styles.childBottom}>
+            <Text style={styles.childBottomLeft}>Contact</Text>
+            <Text style={styles.childBottomRight}>{profile.contact}</Text>
+          </View>
+
         </ScrollView>
 
 			</View>
