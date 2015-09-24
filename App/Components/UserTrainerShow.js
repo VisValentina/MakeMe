@@ -265,6 +265,36 @@ var TRAINER_MOCK_DATABASE = [
                               contact:"angel@purgatory.com",
                               location:"Miami, FL",
                               specialties: "Bootcamp, VIPR"
+                            },
+                            {
+                              id:"4",
+                              name:"Omar Sandoval",
+                              numFavorites:"9",
+                              numComments: "630",
+                              numRoutines:"9",    
+                              bio:'"My classes are difficult and intense - they are not for everyone. If you want to challenge your limits, then come see me."',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["0", "5", "4"],
+                              activeSince: "July 21, 2015",
+                              contact:"omar@titanmethod.com",
+                              location:"New York, NY",
+                              specialties: "Boxing, Combat"
+                            },
+                            {
+                              id:"5",
+                              name:"Jilian Michaels",
+                              numFavorites:"30",
+                              numComments: "890",
+                              numRoutines:"11",    
+                              bio:'"People think maximize your life means to get your sh*t together. But it means appreciating that you are capable of having more."',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["1", "2", "4"],
+                              activeSince: "August 4, 2015",
+                              contact:"jilian@michaels.com",
+                              location:"Los Angeles, CA",
+                              specialties: "Weight Loss"
                             }
                             ];
 
@@ -319,6 +349,8 @@ var TRAINER_MOCK_DATABASE = [
     "Val Pherson": require('image!val_profile'),
     "Chris Reede": require('image!chris_profile'),
     "Angel Alicea": require('image!angel_profile'),
+    "Omar Sandoval": require('image!omar_profile'),
+    "Jilian Michaels": require('image!jilian_profile'),
   };
 
   var coverImages = {
@@ -326,6 +358,8 @@ var TRAINER_MOCK_DATABASE = [
     "Val Pherson": require('image!val_cover'),
     "Chris Reede": require('image!chris_cover'),
     "Angel Alicea": require('image!angel_cover'),
+    "Omar Sandoval": require('image!omar_cover'),
+    "Jilian Michaels": require('image!jilian_cover'),
   };
 
   var images = {

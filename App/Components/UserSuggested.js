@@ -124,6 +124,7 @@ var MOCK_ROUTINE_SUGGESTED_RESULTS = [{
 	  strength: require('image!strength')
 	};
 
+
 var UserSuggested = React.createClass({
 
 getInitialState: function() {
@@ -145,7 +146,6 @@ getInitialState: function() {
 	},
 
 	showRoutine(routineName){
-		console.log(routineName);
 		this.props.navigator.replace({
 			component: RoutineShow,
 			passProps: {routineName}

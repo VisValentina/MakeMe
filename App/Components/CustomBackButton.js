@@ -22,6 +22,7 @@ var CustomBackButton = React.createClass( {
 
 	goBack(){
 		var Playlist = require('./Playlist');
+		var Suggested = require('./Suggested');
 
 		this.props.navigator.push({
 			component: Playlist

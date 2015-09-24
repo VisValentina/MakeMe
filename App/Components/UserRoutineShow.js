@@ -144,119 +144,220 @@ var MOCK_ROUTINE_DATABASE = [{
                                   id: "0",
                                   name: "V - Core 1.2",
                                   trainer: "Val Pherson",
-                                  level: "2",
-                                  category: "core"
+                                  level: 2,
+                                  category: "core",
+                                  numFav: 160,
+                                  duration: 22,
+                                  numComments: 88,
+                                  space: '10 ft',
+                                  equipment: 'Mat',
+                                  targets: 'Abdominals, Back'
                                },
                                {
                                   id: "1",
                                   name: "HIIT",
                                   trainer: "Chris Reede",
                                   level: "3",
-                                  category: "conditioning"
+                                  category: "conditioning",
+                                  numFav: 80,
+                                  duration: 40,
+                                  numComments: 113,
+                                  space: '10 ft',
+                                  equipment: 'Treadmill, Dumbells',
+                                  targets: 'Chest, Legs, Arms'
                                },
                                {
                                   id: "2",
                                   name: "Purgatory 11",
                                   trainer: "Angel Alicea",
                                   level: "3",
-                                  category: "strength"
+                                  category: "strength",
+                                  numFav: 109,
+                                  duration: 55,
+                                  numComments: 317,
+                                  space: 'Open area',
+                                  equipment: 'Heavy Weights',
+                                  targets: 'Back, Legs'
                                },
                                {
                                   id: "3",
                                   name: "Powerstrike",
                                   trainer: "Ilaria Montague",
                                   level: "3",
-                                  category: "kickbox"
+                                  category: "kickbox",
+                                  numFav: 500,
+                                  duration: 59,
+                                  numComments: 289,
+                                  space: '10 ft',
+                                  equipment: 'None',
+                                  targets: 'Legs, Glutes'
                                },
                                {
                                   id: "4",
                                   name: "V - Core 1.3",
                                   trainer: "Val Pherson",
                                   level: "2",
-                                  category: "core"
+                                  category: "core",
+                                  numFav: 322,
+                                  duration: 15,
+                                  numComments: 36,
+                                  space: '5 ft',
+                                  equipment: 'Medicine Ball',
+                                  targets: 'Abdominals'
                                },
                                {
                                   id: "5",
                                   name: "Fit to Fight",
                                   trainer: "James Park",
                                   level: "2",
-                                  category: "boxing"
+                                  category: "boxing",
+                                  numFav: 89,
+                                  duration: 44,
+                                  numComments: 78,
+                                  space: 'Open area',
+                                  equipment: 'Boxing bag, mat',
+                                  targets: 'Chest, Arms'
                                },
                                {
                                   id: "6",
                                   name: "Bodystrikes",
                                   trainer: "Ilaria Montague",
                                   level: "2",
-                                  category: "kickbox"
+                                  category: "kickbox",
+                                  numFav: 809,
+                                  duration: 50,
+                                  numComments: 613,
+                                  space: '10 ft',
+                                  equipment: 'None',
+                                  targets: 'Glutes, Legs'
                                },
                                {
                                   id: "7",
                                   name: "Powerstrike 2.0",
                                   trainer: "Ilaria Montague",
                                   level: "3",
-                                  category: "kickbox"
+                                  category: "kickbox",
+                                  numFav: 400,
+                                  duration: 30,
+                                  numComments: 513,
+                                  space: '10 ft',
+                                  equipment: 'None',
+                                  targets: 'Chest, Legs, Arms'
                                },
                                {
                                   id: "8",
                                   name: "Diesel",
                                   trainer: "Angel Alicea",
                                   level: "3",
-                                  category: "strength"
+                                  category: "strength",
+                                  numFav: 860,
+                                  duration: 55,
+                                  numComments: 616,
+                                  space: '10 ft',
+                                  equipment: 'Heavy Weights, BOSU',
+                                  targets: 'Lower Body'
                                },
                                {
                                   id: "9",
                                   name: "Titan Method 2",
                                   trainer: "Omar Sandoval",
                                   level: "3",
-                                  category: "conditioning"
+                                  category: "conditioning",
+                                  numFav: 525,
+                                  duration: 55,
+                                  numComments: 623,
+                                  space: '5 ft',
+                                  equipment: '2 Kettelbells',
+                                  targets: 'Chest, Shoulders'
                                },
                                {
                                   id: "10",
                                   name: "Hard Core",
                                   trainer: "Val Pherson",
                                   level: "3",
-                                  category: "core"
+                                  category: "core",
+                                  numFav: 22,
+                                  duration: 17,
+                                  numComments: 54,
+                                  space: '5 ft',
+                                  equipment: 'Step, Mat',
+                                  targets: 'Abdominals'
                                },
                                {
                                   id: "11",
                                   name: "Bodyshred",
                                   trainer: "Jilian Michaels",
                                   level: "2",
-                                  category: "conditioning"
+                                  category: "conditioning",
+                                  numFav: '3 k',
+                                  duration: 35,
+                                  numComments: 899,
+                                  space: '10 ft',
+                                  equipment: 'Mat, Dumbells',
+                                  targets: 'Glutes, Back'
                                }
                               ];
+
+var images = {
+  core: require('image!core'),
+  conditioning: require('image!conditioning'),
+  boxing: require('image!boxing'),
+  kickbox: require('image!kickbox'),
+  strength: require('image!strength')
+};
+
+var profileImages = {
+  "Ilaria Montague": require('image!ilaria_profile'),
+  "Val Pherson": require('image!val_profile'),
+  "Chris Reede": require('image!chris_profile'),
+  "Angel Alicea": require('image!angel_profile'),
+  "Omar Sandoval": require('image!omar_profile'),
+  "Jilian Michaels": require('image!jilian_profile'),
+};
 
 var UserRoutineShow = React.createClass({
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
 	},
 
+  getRoutine(routine){
+    console.log(routine)
+    for (var i = MOCK_ROUTINE_DATABASE.length - 1; i >= 0; i--) {
+      if (MOCK_ROUTINE_DATABASE[i].name === routine) {
+        return MOCK_ROUTINE_DATABASE[i]
+      }
+    };
+  },
+
 
 	render(){
 
+    var routine = this.getRoutine(this.props.routineName);
+    var image = images[routine.category];
+    var profileImage = profileImages[routine.trainer];
 
 		return (
 			<View style={styles.tester}>
-        <Image source={require('image!kickbox_category')} style={styles.coverImage}>
-          <Image source={require('image!ilaria_profile')} style={styles.profileImage}/>
+        <Image source={image} style={styles.coverImage}>
+          <Image source={profileImage} style={styles.profileImage}/>
 
            <TouchableHighlight style={styles.highlightButton}>
             <Image source={require('image!add_icon_button')} style={styles.playlistButtonIcon}/>
            </TouchableHighlight>
           
-          <Text style={styles.trainerName1}>Powerstrike 2.0</Text>
+          <Text style={styles.trainerName1}>{routine.name}</Text>
 
           <TouchableHighlight>
-            <Text style={styles.location}>Ilaria Montague</Text>
+            <Text style={styles.location}>{routine.trainer}</Text>
           </TouchableHighlight>
         </Image>
 
 
         <Image source={require('image!triple_red_bar')} style={styles.redBar}>
           <View style={styles.parent}>
-            <Text style={styles.child}>7 k</Text>
-            <Text style={styles.child}>22</Text>
-            <Text style={styles.child}>141</Text>
+            <Text style={styles.child}>{routine.numFav}</Text>
+            <Text style={styles.child}>{routine.duration}</Text>
+            <Text style={styles.child}>{routine.numComments}</Text>
           </View>
 
           <View style={styles.parent}>
@@ -269,27 +370,27 @@ var UserRoutineShow = React.createClass({
         <View style={styles.parentBottom}>
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Level</Text>
-            <Text style={styles.childBottomRight}>3</Text>
+            <Text style={styles.childBottomRight}>{routine.level}</Text>
           </View>
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Space</Text>
-            <Text style={styles.childBottomRight}>10 ft</Text>
+            <Text style={styles.childBottomRight}>{routine.space}</Text>
           </View>
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Equipment</Text>
-            <Text style={styles.childBottomRight}>None</Text>
+            <Text style={styles.childBottomRight}>{routine.equipment}</Text>
           </View>
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Targets</Text>
-            <Text style={styles.childBottomRight}>Legs, Glutes</Text>
+            <Text style={styles.childBottomRight}>{routine.targets}</Text>
           </View>
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Category</Text>
-            <Text style={styles.childBottomRight}>Kickbox</Text>
+            <Text style={styles.childBottomRight}>{routine.category}</Text>
           </View>
 
         </View>

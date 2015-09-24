@@ -34,7 +34,7 @@ var Suggested = React.createClass({
     return (
       <View style={{ flex: 1, }}>
         {navBar}
-        <Component navigator={navigator} route={route} />
+        <Component {...route.passProps} navigator={navigator} route={route} />
       </View>
     );
   },
