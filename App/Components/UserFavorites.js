@@ -1,5 +1,7 @@
 var React = require('react-native');
 var Button = require('apsl-react-native-button');
+var RoutineShow = require('./RoutineShow');
+var TrainerShow = require('./TrainerShow');
 
 var {
   View,
@@ -90,14 +92,90 @@ var styles = StyleSheet.create({
   	letterSpacing: 3,
   	fontSize: 16
   },
+  listView: {
+  	marginTop: -20
+  }
 });
 
+var MOCK_ROUTINE_FAVORITES = [{
+																				name: "Purgatory 4",
+																				trainer: "Angel Alicea",
+																				level: "3",
+																				category: "strength"
+																		 },
+																		 {
+																				name: "Boxcamp",
+																				trainer: "Greg James",
+																				level: "3",
+																				category: "boxing"
+																		 },
+																		 {
+																				name: "Purgatory",
+																				trainer: "Ilaria Montague",
+																				level: "3",
+																				category: "kickbox"
+																		 }
+																		];
+	
+var images = {
+	  core: require('image!core'),
+	  conditioning: require('image!conditioning'),
+	  boxing: require('image!boxing'),
+	  kickbox: require('image!kickbox'),
+	  strength: require('image!strength')
+	};
 
 var UserFavorites = React.createClass({
 
 
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
+	},
+
+	getInitialState: function() {
+   var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+   return {
+     dataSource: ds.cloneWithRows(MOCK_ROUTINE_FAVORITES),
+   };
+ },
+
+ 	showTrainer(trainerName){
+		this.props.navigator.replace({
+			component: TrainerShow,
+			passProps: {trainerName}
+		})
+	},
+
+	showRoutine(routineName){
+		this.props.navigator.replace({
+			component: RoutineShow,
+			passProps: {routineName}
+		})
+	},
+
+	renderRoutine(routine) {
+		var image = images[routine.category];
+
+	return (
+			<View style={styles.tester}>
+				<Image source={image} style={styles.backgroundImage}>
+						<TouchableHighlight onPress={() => this.showRoutine(routine.name)}>
+						 <Text style={styles.routineName}>{routine.name}</Text>
+						</TouchableHighlight>
+
+						<TouchableHighlight onPress={() => this.showTrainer(routine.trainer)}> 
+						 <Text style={styles.trainerName}>{routine.trainer}</Text>
+						</TouchableHighlight>
+
+					 <Text style={styles.routineLevel}>Level {routine.level}</Text>
+					 
+					 <Button onPress={console.log("PRESSED")}
+	                style={styles.playlistButton} textStyle={styles.playlistButtonText}>
+	                +
+	          </Button>
+				 </Image>
+			</View>
+		)
 	},
 
 
@@ -115,22 +193,10 @@ var UserFavorites = React.createClass({
 					</Image>
 				</View>
 
-					<Image source={require('image!strength')} style={styles.backgroundImage}>
-						<TouchableHighlight>
-						 <Text style={styles.routineName}>Purgatory 4</Text>
-						</TouchableHighlight>
-
-						<TouchableHighlight> 
-						 <Text style={styles.trainerName}>Angel Alicea</Text>
-						</TouchableHighlight>
-
-					 <Text style={styles.routineLevel}>Level 3</Text>
-					 
-					 <Button onPress={console.log("PRESSED")}
-	                style={styles.playlistButton} textStyle={styles.playlistButtonText}>
-	                +
-	          </Button>
-				 </Image>
+				<ListView
+					dataSource={this.state.dataSource}
+					renderRow={this.renderRoutine}
+					style={styles.listView}/>
 
 			</View>
 		)
