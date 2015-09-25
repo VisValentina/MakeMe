@@ -2,6 +2,7 @@ var React = require('react-native');
 var Playlist = require('./Playlist');
 var Suggested = require('./Suggested');
 var Go = require('./Go');
+var Favorites = require('./Favorites');
 
 var {
   View,
@@ -81,9 +82,7 @@ var Main = React.createClass({
           title={''}
           icon={require('image!favorites_icon_b')}
           selectedIcon={require('image!favorites_icon')}>
-          <View style={styles.tabContent}>
-            <Text style={styles.tabText}>I AM THE FAVORITE PAGE</Text>
-          </View>
+          <Favorites/>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -93,7 +92,7 @@ var Main = React.createClass({
           icon={require('image!profile_icon_b')}
           selectedIcon={require('image!profile_icon')}>
           <View style={styles.tabContent}>
-            <Text style={styles.tabText}>I AM THE PROFILE PAGE</Text>
+            <Text style={styles.tabText}>I AM THE FAVORITE PAGE</Text>
           </View>
         </TabBarIOS.Item>
       </TabBarIOS>
