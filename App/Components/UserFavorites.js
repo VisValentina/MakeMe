@@ -49,7 +49,7 @@ var styles = StyleSheet.create({
   	alignSelf: 'center',
   	marginTop: 23
   },
-  backgroundImage: {
+  backgroundImageRoutine: {
     height: 135,
     width: 375
   },
@@ -61,7 +61,7 @@ var styles = StyleSheet.create({
   	letterSpacing: 1.5,
   	color: '#ce3c3c'
   },
-  trainerName: {
+  trainerNameRoutine: {
   	marginLeft: 23,
   	fontFamily: 'Raleway',
   	color: '#b3b3b3',
@@ -94,6 +94,45 @@ var styles = StyleSheet.create({
   },
   listView: {
   	marginTop: -20
+  },
+  profile: {
+    width: 62,
+    height: 62,
+    marginTop: 15,
+    marginLeft: 15
+  },
+  trainerName: {
+    color: '#ce3c3c',
+    fontFamily: 'Raleway',
+    fontSize: 18,
+    letterSpacing: 1.5,
+    position: 'absolute',
+    bottom: 20,
+    left: 90,
+    paddingBottom: 20
+  },
+  specialties: {
+    color: '#b3b3b3',
+    fontFamily: 'Raleway',
+    letterSpacing: 1.5,
+    position: 'absolute',
+    bottom: 0,
+    fontSize: 11,
+    left: 90,
+    paddingBottom: 20
+  },
+  completedRoutines: {
+    color: '#b3b3b3',
+    fontFamily: 'Raleway',
+    letterSpacing: 1,
+    fontSize: 11,
+    position: 'absolute',
+    right: 20,
+    top: 30
+  },
+  backgroundTrainer: {
+    width: 375,
+    height: 85
   }
 });
 
@@ -116,6 +155,18 @@ var MOCK_ROUTINE_FAVORITES = [{
 																				category: "kickbox"
 																		 }
 																		];
+
+var MOCK_TRAINER_FAVORITES = [{
+                                        name: "Ilaria Montague",
+                                        specialties: "Martial Arts",
+                                        completed: "3 0f 8"
+                                     },
+                                     {
+                                        name: "Omar Sandoval",
+                                        specialties: "Boxing, Conditioning",
+                                        completed: "2 0f 5"
+                                     }
+                                    ];
 	
 var images = {
 	  core: require('image!core'),
@@ -124,6 +175,16 @@ var images = {
 	  kickbox: require('image!kickbox'),
 	  strength: require('image!strength')
 	};
+
+var barImages = {
+  "active": require('image!true_bar'),
+  "unactive": require('image!false_bar')
+};
+
+var trainerImages = {
+  "Ilaria Montague": require('image!ilaria_profile_fav'),
+  "Omar Sandoval": require('image!omar_profile_fav')
+}
 
 var UserFavorites = React.createClass({
 
@@ -134,8 +195,11 @@ var UserFavorites = React.createClass({
 
 	getInitialState: function() {
    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+   var ds2 = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
    return {
      dataSource: ds.cloneWithRows(MOCK_ROUTINE_FAVORITES),
+     dataSource2: ds2.cloneWithRows(MOCK_TRAINER_FAVORITES),
+     showTrainerSection: false,
    };
  },
 
@@ -153,18 +217,24 @@ var UserFavorites = React.createClass({
 		})
 	},
 
+  toggleTab(bool){
+    this.setState({
+      showTrainerSection: bool
+    })
+  },
+
 	renderRoutine(routine) {
 		var image = images[routine.category];
 
 	return (
 			<View style={styles.tester}>
-				<Image source={image} style={styles.backgroundImage}>
+				<Image source={image} style={styles.backgroundImageRoutine}>
 						<TouchableHighlight onPress={() => this.showRoutine(routine.name)}>
 						 <Text style={styles.routineName}>{routine.name}</Text>
 						</TouchableHighlight>
 
 						<TouchableHighlight onPress={() => this.showTrainer(routine.trainer)}> 
-						 <Text style={styles.trainerName}>{routine.trainer}</Text>
+						 <Text style={styles.trainerNameRoutine}>{routine.trainer}</Text>
 						</TouchableHighlight>
 
 					 <Text style={styles.routineLevel}>Level {routine.level}</Text>
@@ -178,26 +248,61 @@ var UserFavorites = React.createClass({
 		)
 	},
 
+  renderTrainer(trainer) {
+
+    var trainerImage = trainerImages[trainer.name];
+
+      return (
+        <View style={styles.tester}>
+          <Image source={require('image!trainers_background_fav')} style={styles.backgroundTrainer}>
+            <Image source={trainerImage} style={styles.profile}/>
+            <Text style={styles.trainerName}>{trainer.name}</Text>
+            <Text style={styles.specialties}>Specialties: {trainer.specialties}</Text>
+            <Text style={styles.completedRoutines}>{trainer.completed}</Text>
+          </Image>
+         </View> 
+      )  
+  },
+
+  showTabPage() {
+    if (this.state.showTrainerSection) {
+      return (
+        <ListView
+          dataSource={this.state.dataSource2}
+          renderRow={this.renderTrainer}
+          style={styles.listView}/>
+      )
+    } else{
+      return (
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRoutine}
+          style={styles.listView}/>
+      )
+    };
+  },
 
 	render(){
+
+    var routineBar = (this.state.showTrainerSection) ? barImages['unactive'] : barImages['active']; 
+    var trainerBar = (this.state.showTrainerSection) ? barImages['active'] : barImages['unactive'];
 		return (
 			<View style={styles.tester}>
 
 				<View style={styles.child}>
-					<Image source={require('image!true_bar')} style={styles.bar}>
-						<Text style={styles.barTextActive}>ROUTINES</Text>
+        
+        <TouchableHighlight onPress={() => this.toggleTab(false)}>
+					<Image source={routineBar} style={styles.bar}> 
+						<Text style={this.state.showTrainerSection ? styles.barTextDisactive : styles.barTextActive}>ROUTINES</Text>
 					</Image>
-
-					<Image source={require('image!false_bar')} style={styles.bar}>
-						<Text style={styles.barTextDisactive}>TRAINERS</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => this.toggleTab(true)}>
+					<Image source={trainerBar} style={styles.bar}>
+						<Text style={this.state.showTrainerSection ? styles.barTextActive : styles.barTextDisactive}>TRAINERS</Text>
 					</Image>
+        </TouchableHighlight>  
 				</View>
-
-				<ListView
-					dataSource={this.state.dataSource}
-					renderRow={this.renderRoutine}
-					style={styles.listView}/>
-
+        {this.showTabPage()}
 			</View>
 		)
 	}
