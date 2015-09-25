@@ -130,6 +130,9 @@ getInitialState: function() {
 
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
+		if (this.props.routineToDelete) {
+			this.deleteFromArray(this.props.routineToDelete)
+		};
 	},
 
 	showTrainer(trainerName){
@@ -182,7 +185,6 @@ getInitialState: function() {
 				})
 			} 
 		};
-		console.log(MOCK_ROUTINE_PLAYLIST_RESULTS)
 	},
 
 
