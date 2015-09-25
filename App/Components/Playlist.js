@@ -50,7 +50,8 @@ var Playlist = React.createClass({
         		customNext={<CustomNextButton/>}
         		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserPlaylist
+        component: UserPlaylist,
+        passProps: {routineToDelete: this.props.routineName}
       }} />
 		)
 	}

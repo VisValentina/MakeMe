@@ -3,6 +3,7 @@ var NavLogo = require('./NavLogo');
 var NavigationBar = require('react-native-navbar');
 var UserGo = require('./UserGo');
 var CustomNextButton = require('./CustomNextButton');
+var CustomBackButton = require('./CustomBackButton');
 
 var {
   View,
@@ -48,9 +49,11 @@ var Go = React.createClass({
           <NavigationBar
             customTitle={<NavLogo/>}
             customNext={<CustomNextButton/>}
+            customPrev={<CustomBackButton/>}
             backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserGo
+        component: UserGo,
+        passProps: {routine: this.props.routine}
       }} />
     )
   }

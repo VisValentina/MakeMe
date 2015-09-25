@@ -2,6 +2,7 @@ var React = require('react-native');
 var Button = require('apsl-react-native-button');
 var TrainerShow = require('./TrainerShow');
 var RoutineShow = require('./RoutineShow');
+var Go = require('./Go');
 
 var {
   View,
@@ -121,6 +122,12 @@ getInitialState: function() {
    };
  },
 
+ getDefaultProps: function() {
+ 	return {
+ 		routineToDelete: ""
+ 	}
+ },
+
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
 	},
@@ -133,16 +140,55 @@ getInitialState: function() {
 	},
 
 	showRoutine(routineName){
-		console.log(routineName);
 		this.props.navigator.replace({
 			component: RoutineShow,
 			passProps: {routineName}
 		})
 	},
 
+	showGo(routine){
+		this.props.navigator.replace({
+			component: Go,
+			passProps: {routine}
+		})
+	},
+
+	updateArray(routineName) {
+		// Temp function until we get parse synced.
+		// if the routine is not the first on the list, then move it
+		// for now, there cannot be duplicates or the last one will be moved to top
+
+		// go through entire list (mock database)
+		for (var i = MOCK_ROUTINE_PLAYLIST_RESULTS.length - 1; i >= 0; i--) {
+			// if the name of the routine is the same in the db and the index is NOT 0
+			// then remove (splice) from array to a temp
+			// then unshift temp to top of array
+			if (MOCK_ROUTINE_PLAYLIST_RESULTS[i].name === routineName && i !== 0) {
+				var temp = MOCK_ROUTINE_PLAYLIST_RESULTS.splice(i,1);
+				MOCK_ROUTINE_PLAYLIST_RESULTS.unshift(temp[0]);
+				// for testing
+			} 
+		};
+
+	},
+
+	deleteFromArray(routineName) {
+		console.log("parameter from deleteFromArray " + routineName);
+		for (var i = MOCK_ROUTINE_PLAYLIST_RESULTS.length - 1; i >= 0; i--) {
+			if (MOCK_ROUTINE_PLAYLIST_RESULTS[i].name === routineName) {
+				var temp = MOCK_ROUTINE_PLAYLIST_RESULTS.splice(i,1);
+				this.setState({
+					dataSource: this.state.dataSource.cloneWithRows(MOCK_ROUTINE_PLAYLIST_RESULTS)
+				})
+			} 
+		};
+		console.log(MOCK_ROUTINE_PLAYLIST_RESULTS)
+	},
+
 
 
 	renderRoutine(routine) {
+
 		var image = images[routine.category];
 
 		return (
@@ -160,7 +206,9 @@ getInitialState: function() {
 				 <Text style={styles.routineLevel}>Level {routine.level}</Text>
 				 
 				 <Button 
-                style={styles.playlistButton} textStyle={styles.playlistButtonText}>
+                onPress={() => this.showGo(routine)}
+                style={styles.playlistButton} 
+                textStyle={styles.playlistButtonText}>
                 GO
           </Button>
 
@@ -170,8 +218,7 @@ getInitialState: function() {
 	},
 
 	render(){
-		var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
-
+		// var routine = MOCK_ROUTINE_PLAYLIST_RESULTS[0];
 		return (	
 			<ListView
 				dataSource={this.state.dataSource}

@@ -22,6 +22,7 @@ var CustomBackButton = React.createClass( {
 
 	goBack(){
 		var Playlist = require('./Playlist');
+		// how can we make this go to suggested when came from suggested
 		var Suggested = require('./Suggested');
 
 		this.props.navigator.push({

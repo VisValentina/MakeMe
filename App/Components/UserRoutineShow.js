@@ -299,11 +299,11 @@ var MOCK_ROUTINE_DATABASE = [{
                               ];
 
 var images = {
-  core: require('image!core'),
-  conditioning: require('image!conditioning'),
-  boxing: require('image!boxing'),
-  kickbox: require('image!kickbox'),
-  strength: require('image!strength')
+  core: require('image!core_routine'),
+  conditioning: require('image!conditioning_routine'),
+  boxing: require('image!boxing_routine'),
+  kickbox: require('image!kickbox_category'),
+  strength: require('image!strength_routine')
 };
 
 var profileImages = {
