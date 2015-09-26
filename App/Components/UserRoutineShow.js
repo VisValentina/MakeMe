@@ -313,6 +313,8 @@ var profileImages = {
   "Angel Alicea": require('image!angel_profile'),
   "Omar Sandoval": require('image!omar_profile'),
   "Jilian Michaels": require('image!jilian_profile'),
+  "Greg James": require('image!greg_profile'),
+  "James Park": require('image!james_profile')
 };
 
 var UserRoutineShow = React.createClass({

@@ -295,7 +295,37 @@ var TRAINER_MOCK_DATABASE = [
                               contact:"jilian@michaels.com",
                               location:"Los Angeles, CA",
                               specialties: "Weight Loss"
-                            }
+                            },
+                            {
+                              id:"6",
+                              name:"James Park",
+                              numFavorites:"3",
+                              numComments: "79",
+                              numRoutines:"2",    
+                              bio:'"If you do not train like an athlete, you will never become one."',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["0", "1"],
+                              activeSince: "September 13, 2015",
+                              contact:"james@hitfit.com",
+                              location:"San Mateo, CA",
+                              specialties: "MMA"
+                            },
+                            {
+                              id:"7",
+                              name:"Greg James",
+                              numFavorites:"90",
+                              numComments: "972",
+                              numRoutines:"5",    
+                              bio:'"I do not fool around, be an adult and train like an adult. I do not accept excuses."',
+                              profilePic:"",
+                              coverPic:"",
+                              routines: ["2", "4"],
+                              activeSince: "January 2, 2015",
+                              contact:"greg@equinox.com",
+                              location:"New York, NY",
+                              specialties: "Bootcamp, HIIT"
+                            },
                             ];
 
 
@@ -351,6 +381,8 @@ var TRAINER_MOCK_DATABASE = [
     "Angel Alicea": require('image!angel_profile'),
     "Omar Sandoval": require('image!omar_profile'),
     "Jilian Michaels": require('image!jilian_profile'),
+    "Greg James" : require('image!greg_profile'),
+    "James Park" : require('image!james_profile')
   };
 
   var coverImages = {
@@ -360,6 +392,8 @@ var TRAINER_MOCK_DATABASE = [
     "Angel Alicea": require('image!angel_cover'),
     "Omar Sandoval": require('image!omar_cover'),
     "Jilian Michaels": require('image!jilian_cover'),
+    "Greg James": require('image!greg_cover'),
+    "James Park": require('image!james_cover')
   };
 
   var images = {
