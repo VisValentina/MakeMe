@@ -204,6 +204,15 @@ var styles = StyleSheet.create({
     height: 15,
     width: 375,
     borderColor: 'red'
+  },
+  favStar: {
+    height: 30,
+    width: 47,
+    alignSelf: 'center',
+    marginBottom: 10
+  },
+  TouchableHighlight: {
+    
   }
 });
 
@@ -413,7 +422,8 @@ var TRAINER_MOCK_DATABASE = [
      return {
        dataSource: ds.cloneWithRows([]),
        showRoutines: false,
-       showBio: false
+       showBio: false,
+       trainerFavorited: false
      };
   },
 
@@ -431,6 +441,12 @@ var TRAINER_MOCK_DATABASE = [
     this.setState({
       showRoutines: !this.state.showRoutines,
       dataSource: this.state.dataSource.cloneWithRows(routines)
+    })
+  },
+
+  toggleFavorited(){
+    this.setState({
+      trainerFavorited: !this.state.trainerFavorited
     })
   },
 
@@ -483,6 +499,14 @@ var TRAINER_MOCK_DATABASE = [
     };
   },
 
+    trainerFavorite(isFavorite){
+    if (isFavorite) {
+      return ( <Image source={require('image!star_fav_true')} style={styles.favStar}/> )
+    } else {
+      return ( <Image source={require('image!star_fav_false_2')} style={styles.favStar}/>)
+    };
+  },
+
   getTrainer(trainer){
     for (var i = TRAINER_MOCK_DATABASE.length - 1; i >= 0; i--) {
       if (TRAINER_MOCK_DATABASE[i].name === trainer) {
@@ -503,6 +527,9 @@ var TRAINER_MOCK_DATABASE = [
 		return (
 			<View style={styles.tester}>
         <Image source={coverImage} style={styles.coverImage}>
+          <TouchableHighlight onPress={this.toggleFavorited} style={styles.TouchableHighlight} underlayColor={"transparent"}>
+            {this.trainerFavorite(this.state.trainerFavorited)}
+          </TouchableHighlight>
           <Image source={profileImage} style={styles.profileImage}/>
           <Text style={styles.trainerName1}>{profile.name} </Text>
           <Text style={styles.location}>{profile.location}</Text>
