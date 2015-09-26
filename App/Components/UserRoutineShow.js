@@ -295,6 +295,45 @@ var MOCK_ROUTINE_DATABASE = [{
                                   space: '10 ft',
                                   equipment: 'Mat, Dumbells',
                                   targets: 'Glutes, Back'
+                               },
+                               {
+                                  id: "12",
+                                  name: "Purgatory 4",
+                                  trainer: "Angel Alicea",
+                                  level: "3",
+                                  category: "strength",
+                                  numFav: '3 k',
+                                  duration: 35,
+                                  numComments: 899,
+                                  space: '10 ft',
+                                  equipment: 'Mat, Dumbells',
+                                  targets: 'Glutes, Back'
+                               },
+                               {
+                                  id: "13",
+                                  name: "Boxcamp",
+                                  trainer: "Greg James",
+                                  level: "3",
+                                  category: "boxing",
+                                  numFav: '3 k',
+                                  duration: 35,
+                                  numComments: 899,
+                                  space: '10 ft',
+                                  equipment: 'Mat, Dumbells',
+                                  targets: 'Glutes, Back'
+                               },
+                               {
+                                  id: "14",
+                                  name: "Purgatory",
+                                  trainer: "Ilaria Montague",
+                                  level: "3",
+                                  category: "kickbox",
+                                  numFav: '3 k',
+                                  duration: 35,
+                                  numComments: 899,
+                                  space: '10 ft',
+                                  equipment: 'Mat, Dumbells',
+                                  targets: 'Glutes, Back'
                                }
                               ];
 

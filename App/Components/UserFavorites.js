@@ -211,6 +211,7 @@ var UserFavorites = React.createClass({
 	},
 
 	showRoutine(routineName){
+    console.log(routineName)
 		this.props.navigator.replace({
 			component: RoutineShow,
 			passProps: {routineName}
