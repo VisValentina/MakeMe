@@ -1,5 +1,5 @@
 var React = require('react-native');
-var Main = require('./Main');
+var Main = require('../Main');
 var Button = require('apsl-react-native-button');
 var UseMe = require('./UseMe');
 var Start = require('./Start');

@@ -1,9 +1,9 @@
 var React = require('react-native');
-var NavLogo = require('./NavLogo');
+var NavLogo = require('../TopNav/NavLogo');
 var NavigationBar = require('react-native-navbar');
-var CustomNextButton = require('./CustomNextButton');
-var UserTrainerShow = require('./UserTrainerShow');
-var CustomBackButton = require('./CustomBackButton');
+var CustomNextButton = require('../TopNav/CustomNextButton');
+var UserTrainerShow = require('../TrainerShow/UserTrainerShow');
+var CustomBackButton = require('../TopNav/CustomBackButton');
 
 var {
 	View,

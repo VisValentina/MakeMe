@@ -1,8 +1,8 @@
 var React = require('react-native');
-var Playlist = require('./Playlist');
-var Suggested = require('./Suggested');
-var Go = require('./Go');
-var Favorites = require('./Favorites');
+var Playlist = require('./Playlist/Playlist');
+var Suggested = require('./Suggested/Suggested');
+var Go = require('./Go/Go');
+var Favorites = require('./Favorites/Favorites');
 
 var {
   View,
@@ -92,7 +92,7 @@ var Main = React.createClass({
           icon={require('image!profile_icon_b')}
           selectedIcon={require('image!profile_icon')}>
           <View style={styles.tabContent}>
-            <Text style={styles.tabText}>I AM THE FAVORITE PAGE</Text>
+            <Text style={styles.tabText}>I AM THE USER PROFILE PAGE</Text>
           </View>
         </TabBarIOS.Item>
       </TabBarIOS>

@@ -12,7 +12,7 @@ var styles = StyleSheet.create({
 		width: 21,
 		height: 21,
 		alignItems: 'flex-start',
-		marginTop: 24,
+		marginTop: 31,
 		marginLeft: 15
 	}
 });

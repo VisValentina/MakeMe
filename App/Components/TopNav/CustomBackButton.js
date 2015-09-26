@@ -13,7 +13,7 @@ var styles = StyleSheet.create({
 		width: 13,
 		height: 19,
 		alignItems: 'flex-start',
-		marginTop: 24,
+		marginTop: 31,
 		marginLeft: 15
 	}
 });
@@ -21,9 +21,9 @@ var styles = StyleSheet.create({
 var CustomBackButton = React.createClass( {
 
 	goBack(){
-		var Playlist = require('./Playlist');
+		var Playlist = require('../Playlist/Playlist');
 		// how can we make this go to suggested when came from suggested
-		var Suggested = require('./Suggested');
+		var Suggested = require('../Suggested/Suggested');
 
 		this.props.navigator.push({
 			component: Playlist

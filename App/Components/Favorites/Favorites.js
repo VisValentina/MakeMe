@@ -1,11 +1,11 @@
 var React = require('react-native');
-var NavLogoTryMe = require('./NavLogoTryMe');
+var NavLogoTryMe = require('../TopNav/NavLogoTryMe');
 var NavigationBar = require('react-native-navbar');
-var UserPlaylist = require('./UserPlaylist');
+var UserPlaylist = require('../Playlist/UserPlaylist');
 var UserFavorites = require('./UserFavorites');
-var CustomNextButton = require('./CustomNextButton');
-var CustomPrevFilter = require('./CustomPrevFilter');
-var LikeMe = require('./LikeMe');
+var CustomNextButton = require('../TopNav/CustomNextButton');
+var CustomPrevFilter = require('../TopNav/CustomPrevFilter');
+var LikeMe = require('../TopNav/LikeMe');
 
 var {
 	View,

@@ -12,21 +12,20 @@ var styles = StyleSheet.create({
 		height: 28,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginBottom: 12,
-		marginLeft: 5
+		marginBottom: 5
 	}
 });
 
-var NavLogoTryMe = React.createClass({
+var NavLogo = React.createClass({
 	render(){
 		return (
 			<View>
 				<Image
 	        style={styles.icon} 
-	        source={require('image!NavLogoTryMe')} />
+	        source={require('image!NavLogo')} />
       </View>
 		)
 	}
 });
 
-module.exports = NavLogoTryMe
+module.exports = NavLogo

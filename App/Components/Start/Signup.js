@@ -6,7 +6,7 @@ var Button = require('apsl-react-native-button');
 var InputBackground = require('./inputBackground');
 var InputBackgroundLeft = require('./inputBackgroundLeft');
 var About = require('./About');
-var Main = require('./Main');
+var Main = require('../Main');
 
 Parse.initialize(
  'w1pd3PV2UMN7XGjlS3B4ZbWeaovH99ZPub8xH85U',

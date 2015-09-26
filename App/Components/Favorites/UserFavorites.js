@@ -1,7 +1,7 @@
 var React = require('react-native');
 var Button = require('apsl-react-native-button');
-var RoutineShow = require('./RoutineShow');
-var TrainerShow = require('./TrainerShow');
+var RoutineShow = require('../RoutineShow/RoutineShow');
+var TrainerShow = require('../TrainerShow/TrainerShow');
 
 var {
   View,

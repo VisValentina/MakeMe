@@ -1,8 +1,10 @@
 var React = require('react-native');
-var NavLogo = require('./NavLogo');
+var NavLogoTryMe = require('../TopNav/NavLogoTryMe');
 var NavigationBar = require('react-native-navbar');
-var UserPlaylist = require('./UserPlaylist');
-var CustomNextButton = require('./CustomNextButton');
+var UserPlaylist = require('../Playlist/UserPlaylist');
+var CustomNextButton = require('../TopNav/CustomNextButton');
+var CustomPrevFilter = require('../TopNav/CustomPrevFilter');
+var UserSuggested = require('./UserSuggested');
 
 var {
 	View,
@@ -19,7 +21,7 @@ var styles = StyleSheet.create({
 });
 
 
-var Playlist = React.createClass({
+var Suggested = React.createClass({
 
 	renderScene(route, navigator) {
     const Component = route.component;
@@ -46,15 +48,15 @@ var Playlist = React.createClass({
         title: '',
         navigationBar: (
         	<NavigationBar
-        		customTitle={<NavLogo/>}
+        		customTitle={<NavLogoTryMe/>}
         		customNext={<CustomNextButton/>}
+            customPrev={<CustomPrevFilter/>}
         		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserPlaylist,
-        passProps: {routineToDelete: this.props.routineName}
+        component: UserSuggested
       }} />
 		)
 	}
 });
 
-module.exports = Playlist
+module.exports = Suggested

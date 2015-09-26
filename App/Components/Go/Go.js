@@ -1,28 +1,28 @@
 var React = require('react-native');
-var NavLogo = require('./NavLogo');
+var NavLogo = require('../TopNav/NavLogo');
 var NavigationBar = require('react-native-navbar');
-var CustomNextButton = require('./CustomNextButton');
-var UserRoutineShow = require('./UserRoutineShow');
-var CustomBackButton = require('./CustomBackButton');
+var UserGo = require('./UserGo');
+var CustomNextButton = require('../TopNav/CustomNextButton');
+var CustomBackButton = require('../TopNav/CustomBackButton');
 
 var {
-	View,
-	Text,
-	StyleSheet,
-	Navigator
+  View,
+  Text,
+  StyleSheet,
+  Navigator
 } = React;
 
 var styles = StyleSheet.create({
-	container: {
+  container: {
     flex: 1,
     backgroundColor: "black"
   }
 });
 
 
-var RoutineShow = React.createClass({
+var Go = React.createClass({
 
-	renderScene(route, navigator) {
+  renderScene(route, navigator) {
     const Component = route.component;
     let navBar = route.navigationBar;
 
@@ -38,25 +38,25 @@ var RoutineShow = React.createClass({
     );
   },
 
-	render(){
-		return (
-			<Navigator
+  render(){
+    return (
+      <Navigator
         style = {styles.container}
         renderScene={this.renderScene}
         initialRoute={{
         title: '',
         navigationBar: (
-        	<NavigationBar
-        		customTitle={<NavLogo/>}
+          <NavigationBar
+            customTitle={<NavLogo/>}
+            customNext={<CustomNextButton/>}
             customPrev={<CustomBackButton/>}
-        		customNext={<CustomNextButton/>}
-        		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
+            backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserRoutineShow,
-        passProps: {routineName: this.props.routineName}
+        component: UserGo,
+        passProps: {routine: this.props.routine}
       }} />
-		)
-	}
+    )
+  }
 });
 
-module.exports = RoutineShow
+module.exports = Go
