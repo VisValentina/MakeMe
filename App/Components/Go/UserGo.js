@@ -21,25 +21,25 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
     backgroundImage: {
-		flex: 1,
+    flex: 1,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   trainerName: {
-  	color: '#b3b3b3',
-  	letterSpacing: 1.5,
-  	fontFamily: 'Raleway',
-  	marginTop: 14,
-  	fontSize: 12
+    color: '#b3b3b3',
+    letterSpacing: 1.5,
+    fontFamily: 'Raleway',
+    marginTop: 14,
+    fontSize: 12
   },
    routineName: {
-  	color: '#b3b3b3',
-  	letterSpacing: 1.5,
-  	fontFamily: 'Raleway',
-  	fontWeight: 'bold',
-  	marginTop: 19,
-  	fontSize: 17
+    color: '#b3b3b3',
+    letterSpacing: 1.5,
+    fontFamily: 'Raleway',
+    fontWeight: 'bold',
+    marginTop: 19,
+    fontSize: 17
   },
   profileImage: {
     width: 95,
@@ -48,30 +48,30 @@ var styles = StyleSheet.create({
     marginTop: 150
   },
   readyText: {
-  	fontFamily: 'BebasNeue',
-  	color: '#ce3c3c',
-  	fontSize: 31,
-  	letterSpacing: 2
+    fontFamily: 'BebasNeue',
+    color: '#ce3c3c',
+    fontSize: 31,
+    letterSpacing: 2
   },
    xText: {
-  	fontFamily: 'Raleway',
-  	fontWeight: 'bold',
-  	color: '#ce3c3c',
-  	fontSize: 29,
-  	letterSpacing: 2,
-  	marginRight: 25
+    fontFamily: 'Raleway',
+    fontWeight: 'bold',
+    color: '#ce3c3c',
+    fontSize: 29,
+    letterSpacing: 2,
+    marginRight: 25
   },
   playText: {
-  	flex: 1,
-  	flexDirection: 'row',
-  	marginTop: 140
-	},
-	nextGo: {
-		marginTop: 7,
-		height: 20,
-		width: 32,
-		marginLeft: 22
-	}
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 140
+  },
+  nextGo: {
+    marginTop: 7,
+    height: 20,
+    width: 32,
+    marginLeft: 22
+  }
 });
 
   var goBackgroundImages = {
@@ -137,9 +137,9 @@ var UserGo = React.createClass({
     }
   },
 
-	componentWillMount() {
-		StatusBarIOS.setStyle(1);
-	},
+  componentWillMount() {
+    StatusBarIOS.setStyle(1);
+  },
 
   alertDelete(routineName) {
     AlertIOS.alert(
@@ -172,6 +172,22 @@ var UserGo = React.createClass({
     })
   },
 
+  goToTrainerPage(trainerName){
+    var TrainerShow = require('../TrainerShow/TrainerShow');
+    this.props.navigator.replace({
+      component: TrainerShow,
+      passProps: {trainerName}
+    })
+  },
+
+  goToRoutinePage(routineName){
+    var RoutineShow = require('../RoutineShow/RoutineShow');
+    this.props.navigator.replace({
+      component: RoutineShow,
+      passProps: {routineName}
+    })
+  },
+
   getNextRoutine(currentRoutine){
     console.log("get the next routine after this " + currentRoutine);
     var data = this.props.routinePlayListDB;
@@ -193,32 +209,35 @@ var UserGo = React.createClass({
 
   },
 
-	render(){
+  render(){
 
     var routine = this.props.routine;
     var image = goBackgroundImages[routine.category]
     var profileImage = profileImages[routine.trainer]
-		return (	
-			<View style={styles.tester}>
-				<Image source={image} style={styles.backgroundImage}>
-					
-					<Image source={profileImage} style={styles.profileImage}/>
-					<Text style={styles.routineName}>{routine.name}</Text>
-					<Text style={styles.trainerName}>{routine.trainer}</Text>
-				
-					<View style={styles.playText}>
+    return (  
+      <View style={styles.tester}>
+        <Image source={image} style={styles.backgroundImage}>
+          
+          <Image source={profileImage} style={styles.profileImage}/>
+          <TouchableHighlight onPress={() => this.goToRoutinePage(routine.name)}>
+          <Text style={styles.routineName}>{routine.name}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.goToTrainerPage(routine.trainer)}>
+          <Text style={styles.trainerName}>{routine.trainer}</Text>
+          </TouchableHighlight>
+          <View style={styles.playText}>
             <TouchableHighlight onPress={() => this.alertDelete(routine.name)}>
-						<Text style={styles.xText}>X</Text>
+            <Text style={styles.xText}>X</Text>
             </TouchableHighlight>
-						<Text style={styles.readyText}>Ready.</Text>
+            <Text style={styles.readyText}>Ready.</Text>
             <TouchableHighlight onPress={() => this.showNextGo(routine.name)}>
-						<Image source={require('image!next_go')} style={styles.nextGo}/>
+            <Image source={require('image!next_go')} style={styles.nextGo}/>
             </TouchableHighlight>
-					</View>
+          </View>
 
-				</Image>
-			</View>
-	)}
+        </Image>
+      </View>
+  )}
 });
 
 module.exports = UserGo
