@@ -9,7 +9,8 @@ var {
   Text,
   Image,
   StatusBarIOS,
-  TouchableHighlight
+  TouchableHighlight,
+  AlertIOS
 } = React;
 
 var styles = StyleSheet.create({
@@ -140,8 +141,20 @@ var UserGo = React.createClass({
 		StatusBarIOS.setStyle(1);
 	},
 
-  goBackToPlayList(routineName) {
+  alertDelete(routineName) {
+    AlertIOS.alert(
+      'Delete ' + routineName + ' from Playlist',
+      'Are you sure?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Canceled Delete by User')},
+        {text: 'Yes', onPress: () => this.deleteFromPlaylistQueue(routineName)}
+      ]
+    )
+  },
+
+  deleteFromPlaylistQueue(routineName) {
     var Playlist = require('../Playlist/Playlist')
+
     this.props.navigator.push({
       component: Playlist,
       passProps: {routineName}
@@ -194,7 +207,7 @@ var UserGo = React.createClass({
 					<Text style={styles.trainerName}>{routine.trainer}</Text>
 				
 					<View style={styles.playText}>
-            <TouchableHighlight onPress={() => this.goBackToPlayList(routine.name)}>
+            <TouchableHighlight onPress={() => this.alertDelete(routine.name)}>
 						<Text style={styles.xText}>X</Text>
             </TouchableHighlight>
 						<Text style={styles.readyText}>Ready.</Text>

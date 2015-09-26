@@ -19,7 +19,7 @@ var styles = StyleSheet.create({
 });
 
 
-var Playlist = React.createClass({
+var Profile = React.createClass({
 
 	renderScene(route, navigator) {
     const Component = route.component;
@@ -50,11 +50,11 @@ var Playlist = React.createClass({
         		customNext={<CustomNextButton/>}
         		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserPlaylist,
-        passProps: {routineToDelete: this.props.routineName}
+        component: UserProfile,
+        
       }} />
 		)
 	}
 });
 
-module.exports = Playlist
+module.exports = Profile

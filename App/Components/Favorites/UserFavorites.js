@@ -87,10 +87,13 @@ var styles = StyleSheet.create({
   	marginTop: 12
   },
   playlistButtonText: {
-  	fontFamily: 'BebasNeue',
-  	color: '#ce3c3c',
-  	letterSpacing: 3,
-  	fontSize: 16
+    fontFamily: 'HelveticaNeue-Light',
+    color: '#ce3c3c',
+    letterSpacing: 3,
+    fontSize: 21,
+    marginTop: -5,
+    marginLeft: 2,
+    backgroundColor: 'transparent'
   },
   listView: {
   	marginTop: -20
