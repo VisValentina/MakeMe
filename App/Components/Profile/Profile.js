@@ -1,28 +1,27 @@
 var React = require('react-native');
 var NavLogo = require('../TopNav/NavLogo');
 var NavigationBar = require('react-native-navbar');
-var UserGo = require('./UserGo');
+var UserProfile = require('./UserProfile');
 var CustomNextButton = require('../TopNav/CustomNextButton');
-var CustomBackButton = require('../TopNav/CustomBackButton');
 
 var {
-  View,
-  Text,
-  StyleSheet,
-  Navigator
+	View,
+	Text,
+	StyleSheet,
+	Navigator
 } = React;
 
 var styles = StyleSheet.create({
-  container: {
+	container: {
     flex: 1,
     backgroundColor: "black"
   }
 });
 
 
-var Go = React.createClass({
+var Playlist = React.createClass({
 
-  renderScene(route, navigator) {
+	renderScene(route, navigator) {
     const Component = route.component;
     let navBar = route.navigationBar;
 
@@ -38,27 +37,24 @@ var Go = React.createClass({
     );
   },
 
-  render(){
-    return (
-      <Navigator
+	render(){
+		return (
+			<Navigator
         style = {styles.container}
         renderScene={this.renderScene}
         initialRoute={{
         title: '',
         navigationBar: (
-          <NavigationBar
-            customTitle={<NavLogo/>}
-            customNext={<CustomNextButton/>}
-            customPrev={<CustomBackButton/>}
-            backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
+        	<NavigationBar
+        		customTitle={<NavLogo/>}
+        		customNext={<CustomNextButton/>}
+        		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
-        component: UserGo,
-        passProps: {routine: this.props.routine,
-                    routinePlayListDB: this.props.routinePlayListDB
-                   }
+        component: UserPlaylist,
+        passProps: {routineToDelete: this.props.routineName}
       }} />
-    )
-  }
+		)
+	}
 });
 
-module.exports = Go
+module.exports = Playlist

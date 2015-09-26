@@ -3,6 +3,7 @@ var Playlist = require('./Playlist/Playlist');
 var Suggested = require('./Suggested/Suggested');
 var Go = require('./Go/Go');
 var Favorites = require('./Favorites/Favorites');
+var Profile = require('./Profile/Profile');
 
 var {
   View,
@@ -91,9 +92,7 @@ var Main = React.createClass({
           title={''}
           icon={require('image!profile_icon_b')}
           selectedIcon={require('image!profile_icon')}>
-          <View style={styles.tabContent}>
-            <Text style={styles.tabText}>I AM THE USER PROFILE PAGE</Text>
-          </View>
+          <Profile/>
         </TabBarIOS.Item>
       </TabBarIOS>
     )

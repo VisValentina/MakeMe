@@ -141,11 +141,43 @@ var UserGo = React.createClass({
 	},
 
   goBackToPlayList(routineName) {
-    var Playlist = require('./Playlist')
+    var Playlist = require('../Playlist/Playlist')
     this.props.navigator.push({
       component: Playlist,
       passProps: {routineName}
     });
+  },
+
+  showNextGo(routine){
+    var nextRoutine = this.getNextRoutine(routine);
+    var Go = require('./Go')
+
+    this.props.navigator.replace({
+      component: Go,
+      passProps: {routine: nextRoutine,
+                  routinePlayListDB: this.props.routinePlayListDB}
+    })
+  },
+
+  getNextRoutine(currentRoutine){
+    console.log("get the next routine after this " + currentRoutine);
+    var data = this.props.routinePlayListDB;
+
+    for (var i = data.length - 1; i >= 0; i--) {
+      if (data[i].name === currentRoutine) {
+
+        if (i === (data.length - 1)) {
+          console.log("returning the first because it is last")
+          console.log(data.length - 1);
+          return data[0];
+        } else {
+          console.log("returning " + (i + 1) + " record")
+          return data[(i + 1)];
+        };
+          
+      };
+    };
+
   },
 
 	render(){
@@ -166,7 +198,9 @@ var UserGo = React.createClass({
 						<Text style={styles.xText}>X</Text>
             </TouchableHighlight>
 						<Text style={styles.readyText}>Ready.</Text>
+            <TouchableHighlight onPress={() => this.showNextGo(routine.name)}>
 						<Image source={require('image!next_go')} style={styles.nextGo}/>
+            </TouchableHighlight>
 					</View>
 
 				</Image>

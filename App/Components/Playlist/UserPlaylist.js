@@ -152,7 +152,9 @@ getInitialState: function() {
 	showGo(routine){
 		this.props.navigator.replace({
 			component: Go,
-			passProps: {routine}
+			passProps: {routine,
+									routinePlayListDB: MOCK_ROUTINE_PLAYLIST_RESULTS
+								 }
 		})
 	},
 
