@@ -2,6 +2,7 @@ var React = require('react-native');
 var Button = require('apsl-react-native-button');
 var TrainerShow = require('../TrainerShow/TrainerShow');
 var RoutineShow = require('../RoutineShow/RoutineShow');
+var Playlist = require('../Playlist/Playlist');
 
 var {
   View,
@@ -83,42 +84,42 @@ var styles = StyleSheet.create({
 });
 
 var MOCK_ROUTINE_SUGGESTED_RESULTS = [{
-																				name: "Bodystrikes",
-																				trainer: "Ilaria Montague",
-																				level: "2",
-																				category: "kickbox"
-																		 },
-																		 {
-																				name: "Powerstrike 2.0",
-																				trainer: "Ilaria Montague",
-																				level: "3",
-																				category: "kickbox"
-																		 },
-																		 {
-																				name: "Diesel",
-																				trainer: "Angel Alicea",
-																				level: "3",
-																				category: "strength"
-																		 },
-																		 {
-																				name: "Titan Method 2",
-																				trainer: "Omar Sandoval",
-																				level: "3",
-																				category: "strength"
-																		 },
-																		 {
-																				name: "Hard Core",
-																				trainer: "Val Pherson",
-																				level: "3",
-																				category: "core"
-																		 },
-																		 {
-																				name: "Bodyshred",
-																				trainer: "Jilian Michaels",
-																				level: "2",
-																				category: "conditioning"
-																		 },
-																		];
+											name: "Bodystrikes",
+											trainer: "Ilaria Montague",
+											level: "2",
+											category: "kickbox"
+									 },
+									 {
+											name: "Powerstrike 2.0",
+											trainer: "Ilaria Montague",
+											level: "3",
+											category: "kickbox"
+									 },
+									 {
+											name: "Diesel",
+											trainer: "Angel Alicea",
+											level: "3",
+											category: "strength"
+									 },
+									 {
+											name: "Titan Method 2",
+											trainer: "Omar Sandoval",
+											level: "3",
+											category: "strength"
+									 },
+									 {
+											name: "Hard Core",
+											trainer: "Val Pherson",
+											level: "3",
+											category: "core"
+									 },
+									 {
+											name: "Bodyshred",
+											trainer: "Jilian Michaels",
+											level: "2",
+											category: "conditioning"
+									 },
+									];
 	var images = {
 	  core: require('image!core'),
 	  conditioning: require('image!conditioning'),
@@ -155,6 +156,30 @@ getInitialState: function() {
 		})
 	},
 
+	addToPlayList(routineName) {
+		var routineToAdd = "";
+		for (var i = MOCK_ROUTINE_SUGGESTED_RESULTS.length - 1; i >= 0; i--) {
+			if (MOCK_ROUTINE_SUGGESTED_RESULTS[i].name === routineName ) {
+				routineToAdd = MOCK_ROUTINE_SUGGESTED_RESULTS.splice(i,1);
+				this.setState({
+					dataSource: this.state.dataSource.cloneWithRows(MOCK_ROUTINE_SUGGESTED_RESULTS)
+				})
+			}
+		};
+		return routineToAdd[0];
+	},
+
+	goToPlaylistAfterAdd(routineName) {
+		var newRoutineToAdd = this.addToPlayList(routineName);
+
+		this.props.navigator.replace({
+			component: Playlist,
+			passProps: {
+						routineToAdd: newRoutineToAdd
+					   }
+		})
+	},
+
 	renderRoutine(routine) {
 		var image = images[routine.category];
 
@@ -169,7 +194,7 @@ getInitialState: function() {
 				</TouchableHighlight> 
 				 <Text style={styles.routineLevel}>Level {routine.level}</Text>
 				 
-				 <Button onPress={console.log("PRESSED")}
+				 <Button onPress={() => this.goToPlaylistAfterAdd(routine.name)}
                 style={styles.playlistButton} textStyle={styles.playlistButtonText}>
                 +
           </Button>
@@ -180,7 +205,7 @@ getInitialState: function() {
 	},
 
 	render(){
-		var routine = MOCK_ROUTINE_SUGGESTED_RESULTS[0];
+		// var routine = MOCK_ROUTINE_SUGGESTED_RESULTS[0];
 
 		return (
 			<View style={styles.tester}>

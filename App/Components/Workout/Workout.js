@@ -94,7 +94,7 @@ showOptions(){
             <View style={styles.backgroundImage}>
     					
     					{this.showOptions()}
-              
+
             </View>
           </TouchableHighlight>
 

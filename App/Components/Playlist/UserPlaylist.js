@@ -124,7 +124,8 @@ getInitialState: function() {
 
  getDefaultProps: function() {
  	return {
- 		routineToDelete: ""
+ 		routineToDelete: "",
+ 		routineToAdd: ""
  	}
  },
 
@@ -133,6 +134,27 @@ getInitialState: function() {
 		if (this.props.routineToDelete) {
 			this.deleteFromArray(this.props.routineToDelete)
 		};
+
+		if (this.props.routineToAdd) {
+			this.addToArray(this.props.routineToAdd)
+		};
+	},
+
+	addToArray(routine) {
+		var isAlreadyInArray = false
+		for (var i = MOCK_ROUTINE_PLAYLIST_RESULTS.length - 1; i >= 0; i--) {
+			if (MOCK_ROUTINE_PLAYLIST_RESULTS[i].name === routine.name) {
+				isAlreadyInArray = true;
+			}
+		};
+
+		if (!isAlreadyInArray) {
+			MOCK_ROUTINE_PLAYLIST_RESULTS.push(this.props.routineToAdd);
+			this.setState({
+				dataSource: this.state.dataSource.cloneWithRows(MOCK_ROUTINE_PLAYLIST_RESULTS)
+			})
+		} ;
+
 	},
 
 	showTrainer(trainerName){

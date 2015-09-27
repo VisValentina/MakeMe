@@ -5,14 +5,14 @@ var UserPlaylist = require('./UserPlaylist');
 var CustomNextButton = require('../TopNav/CustomNextButton');
 
 var {
-	View,
-	Text,
-	StyleSheet,
-	Navigator
+  View,
+  Text,
+  StyleSheet,
+  Navigator
 } = React;
 
 var styles = StyleSheet.create({
-	container: {
+  container: {
     flex: 1,
     backgroundColor: "black"
   }
@@ -21,7 +21,7 @@ var styles = StyleSheet.create({
 
 var Playlist = React.createClass({
 
-	renderScene(route, navigator) {
+  renderScene(route, navigator) {
     const Component = route.component;
     let navBar = route.navigationBar;
 
@@ -37,24 +37,25 @@ var Playlist = React.createClass({
     );
   },
 
-	render(){
-		return (
-			<Navigator
+  render(){
+    return (
+      <Navigator
         style = {styles.container}
         renderScene={this.renderScene}
         initialRoute={{
         title: '',
         navigationBar: (
-        	<NavigationBar
-        		customTitle={<NavLogo/>}
-        		customNext={<CustomNextButton/>}
-        		backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
+          <NavigationBar
+            customTitle={<NavLogo/>}
+            customNext={<CustomNextButton/>}
+            backgroundStyle={{backgroundColor: "#2d2d2d"}}/>
         ),
         component: UserPlaylist,
-        passProps: {routineToDelete: this.props.routineName}
+        passProps: {routineToDelete: this.props.routineName,
+                    routineToAdd: this.props.routineToAdd}
       }} />
-		)
-	}
+    )
+  }
 });
 
 module.exports = Playlist
