@@ -188,6 +188,15 @@ var UserGo = React.createClass({
     })
   },
 
+  goToWorkoutPage(routineName){
+    var Workout = require('../Workout/Workout');
+    this.props.navigator.replace({
+      component: Workout,
+      passProps: {routineName}
+    })
+  },
+
+
   getNextRoutine(currentRoutine){
     console.log("get the next routine after this " + currentRoutine);
     var data = this.props.routinePlayListDB;
@@ -229,7 +238,11 @@ var UserGo = React.createClass({
             <TouchableHighlight onPress={() => this.alertDelete(routine.name)}>
             <Text style={styles.xText}>X</Text>
             </TouchableHighlight>
+
+            <TouchableHighlight onPress={() => this.goToWorkoutPage(routine.name)}>
             <Text style={styles.readyText}>Ready.</Text>
+            </TouchableHighlight>
+
             <TouchableHighlight onPress={() => this.showNextGo(routine.name)}>
             <Image source={require('image!next_go')} style={styles.nextGo}/>
             </TouchableHighlight>
