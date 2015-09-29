@@ -35,7 +35,7 @@ var CustomNextButton = React.createClass( {
 	onPressLogOut(){
 		// interview question
 		// to prevent dependency cycle!!! 
-		var Start = require('./Start');
+		var Start = require('../Start/Start');
     this.props.navigator.push({
       component: Start
     });      
