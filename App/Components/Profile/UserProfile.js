@@ -167,16 +167,156 @@ var styles = StyleSheet.create({
     position: 'absolute',
     right: 110,
     top: 25
-  }
+  },
+  backgroundImage: {
+    height: 135,
+    width: 375
+  },
+  routineName: {
+    marginLeft: 23,
+    marginTop: 22,
+    fontFamily: 'Raleway',
+    fontSize: 19,
+    letterSpacing: 1.5,
+    color: '#ce3c3c'
+  },
+  trainerName: {
+    marginLeft: 23,
+    fontFamily: 'Raleway',
+    color: '#b3b3b3',
+    fontSize: 11,
+    marginTop: 7,
+    letterSpacing: 1
+  },
+  routineLevel: {
+    marginLeft: 23,
+    fontFamily: 'Raleway',
+    color: '#b3b3b3',
+    fontSize: 10,
+    letterSpacing: 1,
+    marginTop: 5
+  },
+  playlistButton: {
+    marginLeft: 23,
+    backgroundColor: '#1c1c1c',
+    width: 40,
+    height: 22,
+    borderRadius: 7,
+    borderColor: '#1c1c1c',
+    marginTop: 12
+  },
+  playlistButtonText: {
+    fontFamily: 'HelveticaNeue-Light',
+    color: '#ce3c3c',
+    letterSpacing: 3,
+    fontSize: 21,
+    marginTop: -5,
+    marginLeft: 2,
+    backgroundColor: 'transparent'
+  },
 });
+
+var MOCK_COMPLETED_ROUTINE_DATABASE = [{
+                                  id: "0",
+                                  name: "Tabata",
+                                  trainer: "Angel Alicea",
+                                  level: "3",
+                                  category: "conditioning",
+                                  dateCompleted: 'Mon, Oct 5'
+                               },
+                               {
+                                  id: "1",
+                                  name: "VIPR",
+                                  trainer: "Omar Sandoval",
+                                  level: "3",
+                                  category: "strength",
+                                  dateCompleted: 'Tues, Oct 6'
+                               }
+                              ];
+
+  var images = {
+    core: require('image!core'),
+    conditioning: require('image!conditioning'),
+    boxing: require('image!boxing'),
+    kickbox: require('image!kickbox'),
+    strength: require('image!strength')
+  };
+
 
 var UserProfile = React.createClass({
 	componentWillMount() {
 		StatusBarIOS.setStyle(1);
 	},
 
+  getInitialState() {
+     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+     return {
+       dataSource: ds.cloneWithRows(MOCK_COMPLETED_ROUTINE_DATABASE),
+       showCompletedRoutines: false,
+       showMinutes: false
+     };
+  },
+
+  toggleCompletedRoutines(){
+    this.setState({
+      showCompletedRoutines: !this.state.showCompletedRoutines
+    })
+  },
+
+  getRoutines(arr) {
+    var routines = [];
+
+    for (var i = MOCK_COMPLETED_ROUTINE_DATABASE.length - 1; i >= 0; i--) {
+      for (var j = arr.length - 1; j >= 0; j--) {
+        if (MOCK_COMPLETED_ROUTINE_DATABASE[i].id === arr[j]) {
+          routines.push(MOCK_COMPLETED_ROUTINE_DATABASE[i]);
+        };
+      };
+      
+    };
+    return routines;
+  },
+
+    renderCompletedRoutine(routine) {
+    var image = images[routine.category];
+
+    return (
+      <View style={styles.tester}>
+        <Image source={image} style={styles.backgroundImage}>
+
+          <TouchableHighlight >
+            <Text style={styles.routineName}>{routine.name}</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight>
+            <Text style={styles.trainerName}>{routine.trainer}</Text>
+          </TouchableHighlight>
+
+         <Text style={styles.routineLevel}>{routine.dateCompleted}</Text>
+         
+         <Button 
+                style={styles.playlistButton} textStyle={styles.playlistButtonText}>
+                +
+          </Button>
+
+       </Image>
+      </View>
+    )
+  },
+
+  dropDownArrow(active){
+    if (active) {
+      return ( <Image source={require('image!drop_arrow_true')} style={styles.childBottomRightImageTrue}/> )
+    } else {
+      return ( <Image source={require('image!drop_arrow_false')} style={styles.childBottomRightImage}/>)
+    };
+  },
+
 
 	render(){
+
+    //var routines = this.getRoutines(profile.routines);
+
 		return (
 			<View style={styles.tester}>
 
@@ -209,17 +349,30 @@ var UserProfile = React.createClass({
         </Image>
 
 
-        <View style={styles.parentBottom}>
+        <ScrollView style={styles.parentBottom} 
+          automaticallyAdjustContentInsets={false} 
+          contentContainerStyle={styles.parentBottom}>
+
           <View style={styles.childBottomArrows}>
             <Image source={require('image!userprofile_redarrow')} style={styles.redArrowLeft}/>
             <Text style={styles.childBottomDate}>Oct 05 - Oct 11</Text>
             <Image source={require('image!userprofile_redarrowright')} style={styles.redArrowRight}/>
           </View>
 
-          <View style={styles.childBottom}>
-            <Text style={styles.childBottomLeft}>Completed</Text>
-            <Image source={require('image!drop_arrow_false')} style={styles.childBottomRightImage}/>
-          </View>
+          <TouchableHighlight onPress={() => this.toggleCompletedRoutines()}>
+            <View style={styles.childBottom}>
+              <Text style={styles.childBottomLeft}>Completed</Text>
+              {this.dropDownArrow(this.state.showCompletedRoutines)}
+            </View>
+          </TouchableHighlight>
+
+          {this.state.showCompletedRoutines && ( 
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={this.renderCompletedRoutine}
+              style={styles.listView}
+              contentInset={{top: 64}}/>
+          )}
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Minutes</Text>
@@ -236,7 +389,7 @@ var UserProfile = React.createClass({
             <Text style={styles.childBottomRight}>mjones@gmail.com</Text>
           </View>
 
-        </View>
+        </ScrollView>
 
 
 			</View>
