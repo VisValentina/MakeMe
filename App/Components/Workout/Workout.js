@@ -1,5 +1,5 @@
 var React = require('react-native');
-
+var AudioPlayer = require('./AudioPlayer')
 
 var {
   View,
@@ -58,14 +58,45 @@ var Workout = React.createClass({
 
 getInitialState() {
  return {
-  showOption: false
+  showOption: false,
+  playingAudio: true,
+  isPaused: false
  } 
 },
 
 toggleOptions() {
   this.setState({
-    showOptions: !this.state.showOptions
+    showOptions: !this.state.showOptions,
+    playAudio: true
   })
+},
+
+componentDidMount(){
+  if (this.state.playingAudio) {
+    AudioPlayer.play('BabyOneMoreTime.mp3');
+  };
+},
+
+handlePauseButton(){
+  if(this.state.playingAudio && !this.state.isPaused) {
+    AudioPlayer.stop();
+    console.log("is playing and isPaused false")
+    this.setState({
+      playingAudio: false,
+      isPaused: true
+    });
+  }
+
+  if (this.state.isPaused) {
+    console.log("is paused and playing is false")
+    AudioPlayer.play();
+
+    this.setState({
+      playingAudio: true,
+      isPaused: false
+    });
+  };
+
 },
 
 showOptions(){
@@ -74,7 +105,9 @@ showOptions(){
     <View style={styles.backgroundImage}>
       <Text style={styles.xText}>X</Text>
       <Text style={styles.readyText}>VIDEO.</Text>
-      <Text style={styles.pauseText}>II</Text>
+      <TouchableHighlight onPress={this.handlePauseButton}>
+        <Text style={styles.pauseText}>{this.state.playingAudio ? "II" : ">>" }</Text>
+      </TouchableHighlight>
     </View>
     )
   }
@@ -88,8 +121,7 @@ showOptions(){
 
 	render(){
 		return (
-			<View style={styles.tester}>
-          
+			<View style={styles.tester}> 
           <TouchableHighlight onPress={this.toggleOptions}>
             <View style={styles.backgroundImage}>
     					
@@ -97,8 +129,6 @@ showOptions(){
 
             </View>
           </TouchableHighlight>
-
-     
 			</View>
 
     )

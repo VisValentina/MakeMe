@@ -26,6 +26,8 @@
 		8653679D1BB0C5120052A762 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8653679C1BB0C5120052A762 /* Raleway-Bold.ttf */; settings = {ASSET_TAGS = (); }; };
 		866BFABE1BAE0D9900592285 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 866BFABD1BAE0D9900592285 /* BebasNeue.otf */; settings = {ASSET_TAGS = (); }; };
 		869B4E4F1BAB4115006C4B13 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 869B4E4E1BAB4115006C4B13 /* Raleway-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
+		86EE5F681BBB424F001CD010 /* libAudioPlayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE5F5D1BBB423B001CD010 /* libAudioPlayerManager.a */; };
+		86EE5F6A1BBB4358001CD010 /* BabyOneMoreTime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86EE5F691BBB4358001CD010 /* BabyOneMoreTime.mp3 */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		86EE5F5C1BBB423B001CD010 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86EE5F581BBB423B001CD010 /* AudioPlayerManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = AudioPlayerManager;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +142,8 @@
 		8653679C1BB0C5120052A762 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
 		866BFABD1BAE0D9900592285 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
 		869B4E4E1BAB4115006C4B13 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
+		86EE5F581BBB423B001CD010 /* AudioPlayerManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioPlayerManager.xcodeproj; path = ../Libraries/AudioPlayerManager/AudioPlayerManager.xcodeproj; sourceTree = "<group>"; };
+		86EE5F691BBB4358001CD010 /* BabyOneMoreTime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BabyOneMoreTime.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86EE5F681BBB424F001CD010 /* libAudioPlayerManager.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -269,6 +281,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				86EE5F581BBB423B001CD010 /* AudioPlayerManager.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -294,6 +307,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				86EE5F691BBB4358001CD010 /* BabyOneMoreTime.mp3 */,
 				8653679C1BB0C5120052A762 /* Raleway-Bold.ttf */,
 				866BFABD1BAE0D9900592285 /* BebasNeue.otf */,
 				869B4E4E1BAB4115006C4B13 /* Raleway-Regular.ttf */,
@@ -311,6 +325,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* MakeMe.app */,
 				00E356EE1AD99517003FC87E /* MakeMeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		86EE5F591BBB423B001CD010 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				86EE5F5D1BBB423B001CD010 /* libAudioPlayerManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -380,6 +402,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 86EE5F591BBB423B001CD010 /* Products */;
+					ProjectRef = 86EE5F581BBB423B001CD010 /* AudioPlayerManager.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -500,6 +526,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		86EE5F5D1BBB423B001CD010 /* libAudioPlayerManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAudioPlayerManager.a;
+			remoteRef = 86EE5F5C1BBB423B001CD010 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -518,6 +551,7 @@
 				8653679D1BB0C5120052A762 /* Raleway-Bold.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				86EE5F6A1BBB4358001CD010 /* BabyOneMoreTime.mp3 in Resources */,
 				866BFABE1BAE0D9900592285 /* BebasNeue.otf in Resources */,
 				869B4E4F1BAB4115006C4B13 /* Raleway-Regular.ttf in Resources */,
 			);

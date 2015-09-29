@@ -142,7 +142,7 @@ var styles = StyleSheet.create({
     paddingRight: 30,
     letterSpacing: 1,
     backgroundColor: 'transparent'
-  },
+  }
 });
 
 var UserProfile = React.createClass({
@@ -184,56 +184,32 @@ var UserProfile = React.createClass({
         </Image>
 
 
-        <ScrollView style={styles.parentBottom} 
-          automaticallyAdjustContentInsets={false} 
-          contentContainerStyle={styles.parentBottom}>
-
-          
-            <TouchableHighlight onPress={() => this.toggleRoutine(routines)}>
-              <View style={styles.childBottom}>
-                <Text style={styles.childBottomLeft}>Routines</Text>
-                {this.dropDownArrow(this.state.showRoutines)}
-              </View>
-            </TouchableHighlight>
-          
-
-          {this.state.showRoutines && (<View style={styles.spacer}></View>)}
-
-          {this.state.showRoutines && ( 
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRoutine}
-              style={styles.listView}
-              contentInset={{top: 64}}/>
-          )}
-
-          
-            <TouchableHighlight onPress={this.toggleBio}>
-            <View style={styles.childBottom}>
-              <Text style={styles.childBottomLeft}>Bio</Text>
-              {this.dropDownArrow(this.state.showBio)}
-            </View>
-            </TouchableHighlight>
-          
-
-          {this.state.showBio && (<Text style={styles.childBottomBio}>{profile.bio}</Text>)}
-          
+        <View style={styles.parentBottom}>
           <View style={styles.childBottom}>
-            <Text style={styles.childBottomLeft}>Active Since</Text>
-            <Text style={styles.childBottomRight}>{profile.activeSince}</Text>
+            <Text style={styles.childBottomDate}>Oct 05 - Oct 11</Text>
           </View>
 
           <View style={styles.childBottom}>
-            <Text style={styles.childBottomLeft}>Specialties</Text>
-            <Text style={styles.childBottomRight}>{profile.specialties}</Text>
+            <Text style={styles.childBottomLeft}>Completed</Text>
+            <Text style={styles.childBottomRight}>ARROW</Text>
           </View>
 
           <View style={styles.childBottom}>
-            <Text style={styles.childBottomLeft}>Contact</Text>
-            <Text style={styles.childBottomRight}>{profile.contact}</Text>
+            <Text style={styles.childBottomLeft}>Minutes</Text>
+            <Text style={styles.childBottomRight}>ARROW</Text>
           </View>
 
-        </ScrollView>
+          <View style={styles.childBottom}>
+            <Text style={styles.childBottomLeft}>Intensity</Text>
+            <Text style={styles.childBottomRight}>8% Increase</Text>
+          </View>
+
+          <View style={styles.childBottom}>
+            <Text style={styles.childBottomLeft}>Email</Text>
+            <Text style={styles.childBottomRight}>mjones@gmail.com</Text>
+          </View>
+
+        </View>
 
 
 			</View>
