@@ -102,6 +102,13 @@ var styles = StyleSheet.create({
     borderWidth: .5,
     height: 60
   },
+  childBottomArrows: {
+    flexDirection: 'row',
+    borderColor: '#333333',
+    borderWidth: .5,
+    height: 60,
+    justifyContent: 'center'
+  },
   childBottomLeft: {
     flex: 1,
     textAlign: 'left',
@@ -112,21 +119,6 @@ var styles = StyleSheet.create({
     paddingLeft: 30,
     letterSpacing: 1,
     backgroundColor: 'transparent'
-  },
-  childBottomBio: {
-    borderColor: 'transparent',
-    borderWidth: .5,
-    textAlign: 'center',
-    fontSize: 14,
-    fontFamily: 'Helvetica Neue',
-    fontStyle: 'italic',
-    color: '#ce3c3c',
-    letterSpacing: 1,
-    lineHeight: 20,
-    backgroundColor: 'transparent',
-    height: 110,
-    marginRight: 40,
-    marginLeft: 40
   },
   listView: {
     marginBottom: -50,
@@ -142,6 +134,39 @@ var styles = StyleSheet.create({
     paddingRight: 30,
     letterSpacing: 1,
     backgroundColor: 'transparent'
+  },
+  childBottomRightImage: {
+    height: 10,
+    width: 8,
+    alignSelf: 'center',
+    marginRight: 30
+  },
+  childBottomRightImageTrue: {
+    height: 8,
+    width: 10,
+    alignSelf: 'center',
+    marginRight: 30
+  },
+  childBottomDate: {
+    color: '#ce3c3c',
+    fontFamily: 'Raleway',
+    alignSelf: 'center',
+    fontSize: 14,
+    letterSpacing: 1,
+  },
+  redArrowLeft: {
+    width: 9,
+    height: 10,
+    position: 'absolute',
+    left: 110,
+    top: 25
+  },
+  redArrowRight: {
+    width: 9,
+    height: 10,
+    position: 'absolute',
+    right: 110,
+    top: 25
   }
 });
 
@@ -159,7 +184,7 @@ var UserProfile = React.createClass({
           <Image source={require('image!profile_martina')} style={styles.profileImage}/>
 
            <TouchableHighlight style={styles.highlightButton}>
-            <Image source={require('image!add_icon_button')} style={styles.playlistButtonIcon}/>
+            <Image source={require('image!edit_button')} style={styles.playlistButtonIcon}/>
            </TouchableHighlight>
           
           <Text style={styles.trainerName1}>FitMartin87</Text>
@@ -185,18 +210,20 @@ var UserProfile = React.createClass({
 
 
         <View style={styles.parentBottom}>
-          <View style={styles.childBottom}>
+          <View style={styles.childBottomArrows}>
+            <Image source={require('image!userprofile_redarrow')} style={styles.redArrowLeft}/>
             <Text style={styles.childBottomDate}>Oct 05 - Oct 11</Text>
+            <Image source={require('image!userprofile_redarrowright')} style={styles.redArrowRight}/>
           </View>
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Completed</Text>
-            <Text style={styles.childBottomRight}>ARROW</Text>
+            <Image source={require('image!drop_arrow_false')} style={styles.childBottomRightImage}/>
           </View>
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Minutes</Text>
-            <Text style={styles.childBottomRight}>ARROW</Text>
+            <Image source={require('image!drop_arrow_false')} style={styles.childBottomRightImage}/>
           </View>
 
           <View style={styles.childBottom}>
