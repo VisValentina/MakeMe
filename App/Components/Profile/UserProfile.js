@@ -156,17 +156,22 @@ var styles = StyleSheet.create({
   },
   redArrowLeft: {
     width: 9,
-    height: 10,
+    height: 10
+  },
+  redArrowLeftHighlight: {
     position: 'absolute',
     left: 110,
+    top: 25
+  },
+  redArrowRightHighlight: {
+    position: 'absolute',
+    right: 110,
     top: 25
   },
   redArrowRight: {
     width: 9,
     height: 10,
-    position: 'absolute',
-    right: 110,
-    top: 25
+    position: 'absolute'
   },
   backgroundImage: {
     height: 135,
@@ -214,6 +219,34 @@ var styles = StyleSheet.create({
     marginLeft: 2,
     backgroundColor: 'transparent'
   },
+  minutesPopup: {
+    flexDirection: 'row',
+    width: 375,
+    height: 50,
+    backgroundColor: 'black'
+  },
+  childBottomLeftRed: {
+    flex: 1,
+    textAlign: 'left',
+    fontSize: 13,
+    fontFamily: 'Raleway',
+    color: '#ce3c3c',
+    alignSelf: 'center',
+    paddingLeft: 30,
+    letterSpacing: 1,
+    backgroundColor: 'transparent'
+  },
+  childBottomRightRed: {
+    flex: 1,
+    textAlign: 'right',
+    fontSize: 12,
+    fontFamily: 'Raleway',
+    color: '#ce3c3c',
+    alignSelf: 'center',
+    paddingRight: 30,
+    letterSpacing: 1,
+    backgroundColor: 'transparent'
+  },
 });
 
 var MOCK_COMPLETED_ROUTINE_DATABASE = [{
@@ -234,6 +267,9 @@ var MOCK_COMPLETED_ROUTINE_DATABASE = [{
                                }
                               ];
 
+  var MOCK_CALENDAR = [ "Oct 05 - Oct 11", "Sept 28 - Oct 4", "Sept 21 - Sep 27"];
+
+
   var images = {
     core: require('image!core'),
     conditioning: require('image!conditioning'),
@@ -253,7 +289,8 @@ var UserProfile = React.createClass({
      return {
        dataSource: ds.cloneWithRows(MOCK_COMPLETED_ROUTINE_DATABASE),
        showCompletedRoutines: false,
-       showMinutes: false
+       showMinutes: false,
+       showWeekId: 0
      };
   },
 
@@ -262,6 +299,13 @@ var UserProfile = React.createClass({
       showCompletedRoutines: !this.state.showCompletedRoutines
     })
   },
+
+  toggleShowMinutes(){
+    this.setState({
+      showMinutes: !this.state.showMinutes
+    })
+  },
+
 
   getRoutines(arr) {
     var routines = [];
@@ -277,7 +321,19 @@ var UserProfile = React.createClass({
     return routines;
   },
 
-    renderCompletedRoutine(routine) {
+  handleWeekChange(direction){
+    if (direction === "decrease") {
+      this.setState({
+        showWeekId: this.state.showWeekId + 1
+      })
+    } else {
+      this.setState({
+        showWeekId: this.state.showWeekId - 1
+      })
+    };
+  },
+
+  renderCompletedRoutine(routine) {
     var image = images[routine.category];
 
     return (
@@ -312,10 +368,25 @@ var UserProfile = React.createClass({
     };
   },
 
+  showButton(direction){
+    if(direction === "right") {
+      return (
+        <TouchableHighlight style={styles.redArrowRightHighlight} onPress={ () => this.handleWeekChange("increase")}>
+          <Image source={require('image!userprofile_redarrowright')} style={styles.redArrowRight}/>
+        </TouchableHighlight>
+      )
+    }
+    else {
+      return (
+        <TouchableHighlight style={styles.redArrowLeftHighlight} onPress={ () => this.handleWeekChange("decrease")}>
+              <Image source={require('image!userprofile_redarrow')} style={styles.redArrowLeft}/>
+        </TouchableHighlight>
+      )
+    }
+  },
+
 
 	render(){
-
-    //var routines = this.getRoutines(profile.routines);
 
 		return (
 			<View style={styles.tester}>
@@ -354,9 +425,10 @@ var UserProfile = React.createClass({
           contentContainerStyle={styles.parentBottom}>
 
           <View style={styles.childBottomArrows}>
-            <Image source={require('image!userprofile_redarrow')} style={styles.redArrowLeft}/>
-            <Text style={styles.childBottomDate}>Oct 05 - Oct 11</Text>
-            <Image source={require('image!userprofile_redarrowright')} style={styles.redArrowRight}/>
+            {this.state.showWeekId < MOCK_CALENDAR.length - 1 ? this.showButton("left") : <View />}
+            
+            <Text style={styles.childBottomDate}>{MOCK_CALENDAR[this.state.showWeekId]}</Text>
+            {this.state.showWeekId != 0 ? this.showButton("right") : <View />}
           </View>
 
           <TouchableHighlight onPress={() => this.toggleCompletedRoutines()}>
@@ -374,10 +446,29 @@ var UserProfile = React.createClass({
               contentInset={{top: 64}}/>
           )}
 
-          <View style={styles.childBottom}>
-            <Text style={styles.childBottomLeft}>Minutes</Text>
-            <Image source={require('image!drop_arrow_false')} style={styles.childBottomRightImage}/>
-          </View>
+          <TouchableHighlight onPress={() => this.toggleShowMinutes()}>
+            <View style={styles.childBottom}>
+              <Text style={styles.childBottomLeft}>Stats</Text>
+              {this.dropDownArrow(this.state.showMinutes)}
+            </View>
+          </TouchableHighlight>
+
+          {this.state.showMinutes && ( 
+            <View>
+              <View style={styles.minutesPopup}>
+                <Text style={styles.childBottomLeftRed}>Done this week:</Text>
+                <Text style={styles.childBottomRightRed}>2 routines</Text>
+              </View>
+              <View style={styles.minutesPopup}>
+                <Text style={styles.childBottomLeftRed}>Minutes this week:</Text>
+                <Text style={styles.childBottomRightRed}>88 minutes</Text>
+              </View>
+              <View style={styles.minutesPopup}>
+                <Text style={styles.childBottomLeftRed}>Versus last week:</Text>
+                <Text style={styles.childBottomRightRed}>13% Increase</Text>
+              </View>
+            </View>
+          )}
 
           <View style={styles.childBottom}>
             <Text style={styles.childBottomLeft}>Intensity</Text>
