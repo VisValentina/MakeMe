@@ -5,6 +5,8 @@ var Go = require('./Go/Go');
 var Favorites = require('./Favorites/Favorites');
 var Profile = require('./Profile/Profile');
 
+var { Actions } = require('react-native-router-flux');
+
 var {
   View,
   StyleSheet,

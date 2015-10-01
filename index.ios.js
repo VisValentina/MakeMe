@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var NavigationBar = require('react-native-navbar');
+var { Router, Schema, Route, Actions } = require('react-native-router-flux');
 var Start = require('./App/Components/Start/Start');
 var Main = require('./App/Components/Main');
 
@@ -14,45 +14,23 @@ var {
 } = React;
 
 var MakeMe = React.createClass({
-
-  renderScene(route, navigator) {
-    var Component = route.component;
-    var navBar = route.navigationBar;
-
-    if (navBar) {
-      navBar = React.addons.cloneWithProps(navBar, {navigator, route, });
+  componentDidMount(){
+    //check if authed.
+    if(true){ //user is authed
+      Actions.main();
+    } else {
+      Actions.start();
     }
-
-    return (
-      <View style={{ flex: 1, }}>
-        {navBar}
-        <Component navigator={navigator} route={route} />
-      </View>
-    );
   },
-
-  render() {
+  render(){
     return (
-      <Navigator
-        style = {styles.container}
-        renderScene = {this.renderScene}
-        initialRoute =  {{
-          title: '',
-          navigationBar: (
-            <NavigationBar
-              backgroundStyle={{backgroundColor: "transparent"}}
-              style={{height: 0}}/>
-          ),
-          component: Main
-        }} />
+      <Router>
+        <Route name="main" component={Main} initial={true} />
+        <Route name="start" component={Start} hideNavBar={true} />
+      </Router>
     );
   }
 });
-
-
-
-
-
 
 var styles = StyleSheet.create({
   container: {

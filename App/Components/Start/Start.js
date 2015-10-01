@@ -6,7 +6,6 @@ var Button = require('apsl-react-native-button');
 var Login = require('./Login');
 var Signup = require('./Signup');
 
-
 var {
 	View,
 	StyleSheet,
@@ -14,53 +13,6 @@ var {
 	StatusBarIOS,
 	Text
 } = React;
-
-var styles = StyleSheet.create({
-  tester: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-    backgroundImage: {
-    flex: 1,
-    resizeMode: 'contain',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: -65
-  },
-  tagLine: {
-  	color: '#e6e6e6',
-  	letterSpacing: 1,
-  	fontFamily: 'Raleway',
-  	marginTop: 19,
-  	fontSize: 12
-  },
-  loginStyleButton: {
-  	marginTop: 290,
-  	backgroundColor: '#ce3c3c',
-  	width: 185,
-  	alignSelf: 'center',
-  	borderRadius: 23,
-  	borderColor: '#e6e6e6',
-  	borderWidth: .5
-  },
-  loginStyleText: {
-  	color: '#e6e6e6',
-  	fontFamily: 'Raleway',
-  	fontSize: 14,
-  	letterSpacing: 1.2
-  },
-  signupStyleButton: {
-  	marginTop: 10,
-  	backgroundColor: 'transparent',
-  	width: 185,
-  	alignSelf: 'center',
-  	borderRadius: 23,
-  	borderColor: '#e6e6e6',
-  	borderWidth: .5
-  }
-});
 
 var Start = React.createClass({
 	componentWillMount() {
@@ -103,4 +55,51 @@ var Start = React.createClass({
 	)}
 });
 
-module.exports = Start
+var styles = StyleSheet.create({
+  tester: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+    backgroundImage: {
+    flex: 1,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginTop: -65
+  },
+  tagLine: {
+    color: '#e6e6e6',
+    letterSpacing: 1,
+    fontFamily: 'Raleway',
+    marginTop: 19,
+    fontSize: 12
+  },
+  loginStyleButton: {
+    marginTop: 290,
+    backgroundColor: '#ce3c3c',
+    width: 185,
+    alignSelf: 'center',
+    borderRadius: 23,
+    borderColor: '#e6e6e6',
+    borderWidth: .5
+  },
+  loginStyleText: {
+    color: '#e6e6e6',
+    fontFamily: 'Raleway',
+    fontSize: 14,
+    letterSpacing: 1.2
+  },
+  signupStyleButton: {
+    marginTop: 10,
+    backgroundColor: 'transparent',
+    width: 185,
+    alignSelf: 'center',
+    borderRadius: 23,
+    borderColor: '#e6e6e6',
+    borderWidth: .5
+  }
+});
+
+module.exports = Start;
