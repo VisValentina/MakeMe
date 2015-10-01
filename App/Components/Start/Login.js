@@ -10,8 +10,8 @@ var Main = require('../Main');
 
 
 Parse.initialize(
- 'w1pd3PV2UMN7XGjlS3B4ZbWeaovH99ZPub8xH85U',
- 'pXUDia29pk6RS4jhtRlCh4jvuy9WMjjjYNIVnfLV'
+ "APP KEY",
+ "JS KEY"
 );
 
 var {

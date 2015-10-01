@@ -85,11 +85,9 @@ handlePauseButton(){
       playingAudio: false,
       isPaused: true
     });
-  }
-
-  if (this.state.isPaused) {
+  } else {
     console.log("is paused and playing is false")
-    AudioPlayer.play();
+    AudioPlayer.pause();
 
     this.setState({
       playingAudio: true,

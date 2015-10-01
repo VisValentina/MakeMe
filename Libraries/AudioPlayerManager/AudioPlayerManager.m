@@ -99,6 +99,8 @@ RCT_EXPORT_METHOD(playWithUrl:(NSURL *) url)
 RCT_EXPORT_METHOD(pause) {
 	if (_audioPlayer.playing) {
 		[_audioPlayer pause];
+	} else {
+        [_audioPlayer play];
 	}
 }
 
