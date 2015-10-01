@@ -1,5 +1,5 @@
 var React = require('react-native');
-
+var { Actions } = require('react-native-router-flux');
 
 var {
 	View,
@@ -33,12 +33,8 @@ var CustomNextButton = React.createClass( {
 	},
 
 	onPressLogOut(){
-		// interview question
-		// to prevent dependency cycle!!! 
-		var Start = require('../Start/Start');
-    this.props.navigator.push({
-      component: Start
-    });      
+		//unauth
+		Actions.start();
 	},
 
 	render(){
