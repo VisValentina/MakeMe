@@ -43,7 +43,7 @@ var MakeMe = React.createClass({
               backgroundStyle={{backgroundColor: "transparent"}}
               style={{height: 0}}/>
           ),
-          component: Main
+          component: Start
         }} />
     );
   }
